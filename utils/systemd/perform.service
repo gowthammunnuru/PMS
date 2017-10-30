@@ -1,0 +1,13 @@
+[Unit]
+Description=Supervisor process control system for perform
+Documentation=http://supervisord.org
+After=network.target
+
+[Service]
+RemainAfterExit=yes
+ExecStart=/usr/pic1/perform/bin/supervisord -c /usr/pic1/perform/Perform-2.0/supervisord.conf
+ExecStop=/usr/pic1/perform/bin/supervisorctl shutdown
+RestartSec=50s
+
+[Install]
+WantedBy=multi-user.target

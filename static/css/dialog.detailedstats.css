@@ -1,0 +1,39 @@
+.dialog .body.detailed-stats {
+  height: 600px;
+  width: 100%;
+  overflow-y: auto;
+  margin-bottom: 40px;
+}
+.dialog .body.detailed-stats .category {
+  width: 100%;
+  clear: both;
+  margin-bottom: 2em;
+}
+.dialog .body.detailed-stats ul li {
+  width: 40%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  list-style: none;
+  padding: 5px;
+  float: left;
+  cursor: pointer;
+}
+.dialog .body.detailed-stats ul li:hover {
+  background-color: #f5f5f5;
+}
+.dialog .body.detailed-stats ul li.inactive {
+  color: gray;
+  cursor: default;
+}
+.dialog .body.detailed-stats ul li.inactive:hover {
+  background-color: white;
+}
+.dialog .body.detailed-stats ul li img {
+  max-height: 32px;
+  display: inline-block;
+  margin-right: 8px;
+}
+.align-center {
+  text-align: center;
+}

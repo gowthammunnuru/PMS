@@ -1,0 +1,252 @@
+/* --------------------------------------------- */
+/* Prompt
+/* --------------------------------------------- */
+
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+table.prompt-table td, table.prompt-table th {
+    text-align: center;
+    padding: 10px;
+}
+
+table.prompt-table td.prompt, table.prompt-table th.section-head {
+    width: 300px;
+}
+
+table.prompt-table th {
+    border-top: 1px solid rgb(200, 200, 200);
+    width: 125px;
+    font-weight: normal;
+}
+
+table.prompt-table tr {
+    border-bottom: 1px solid rgb(200, 200, 200);
+    cursor: default;
+
+    &:hover {
+        background-color: #f5f5f5;
+    }
+
+    &.highlight {
+        border: 2px solid rgb(255, 142, 142);
+        }
+}
+
+.popover-target {
+    color: #9575CD;
+    font-size: 10px;
+    margin-left: 4px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+    margin-right: -18px;
+    text-decoration: underline;
+    display: inline-block;
+
+    &:hover {
+        color: #673AB7;
+        }
+    }
+
+
+
+table.prompt-table {
+    min-width: 40%;
+    margin-bottom: 50px;
+    margin-top: 10px;
+
+    .noselect;
+}
+
+.prompt-block {
+    height: 40px;
+    padding: 0px !important;
+    vertical-align: center;
+    cursor: pointer;
+
+}
+.prompt-block div {
+    transition: background-color ease-in-out 50ms, color ease-in-out 50ms;
+    padding-top: 5px;
+    width: 100%;
+    height: 30px;
+    color: white;
+}
+
+.section-head {
+    cursor: pointer;
+    color: #5E5E5E;
+
+    &:hover {
+        color: #333333;
+        }
+
+    h4 {
+        font-weight: bold;
+    }
+
+    span.glyphicon {
+        float: left;
+        color: gray;
+        top: 13px;
+    }
+
+}
+
+
+.prompt-block-4 {
+    padding-right: 3px;
+}
+
+.prompt-block-5, .prompt-block-6 {
+    padding: 0px 5px;
+}
+
+.prompt-block-alt {
+    height: 6px !important;
+    transition: background-color ease-in-out 100ms, color ease-in-out 100ms;
+}
+
+
+.prompt-block-dot, .prompt-block-thin {
+    height: 0px !important;
+    padding: 0px !important;
+    background-color: blue;
+    /*border-top: 1px solid #0d5302;*/
+}
+
+.prompt-block-dot:after {
+    content: "•";
+    content: "˧";
+    content: "⤞";
+    content: "x";
+    content: "⇥";
+    content: "•";
+    content: "⦂";
+    content: "»";
+    content: "×";
+    content: "★";
+    content: "⇥";
+    color: rgb(95, 0, 255);
+    font-size: 40px;
+    top: -17px;
+    line-height: 0px;
+    position: relative;
+}
+
+/* --------------------------------------------- */
+/* Multi Prompt
+/* --------------------------------------------- */
+
+
+.multi-prompt-wrapper {
+    height: 40px;
+    margin: 5px;
+    padding: 0px 0px;
+    background-color: rgba(235, 235, 235, 0.5);
+    cursor: pointer;
+    z-index: 10;
+}
+
+.multi-prompt-block {
+    height: 100%;
+    width: 13.5%;
+    display: inline-block;
+    background-color: rgba(0, 0, 0, 0) !important;
+    border-bottom-width: 10px;
+    border-bottom-style: solid;
+    z-index: 100000;
+    transition: border-color ease-in-out 100ms;
+    box-sizing: border-box;
+    color: rgba(0, 0, 0, 0) !important;
+}
+
+.multi-prompt-label {
+    margin-left: 5px;
+    margin-top: 5px;
+    position: absolute;
+    pointer-events: none;
+    min-width: 10px;
+}
+
+.multi-prompt-block-5, .multi-prompt-block-6 {
+    margin: 0px 0px 0px 1%;
+}
+
+.multi-prompt-block-0 {
+    margin-left: 3%;
+}
+
+.multi-prompt-fixed-criteria-name {
+    margin-top: 10px;
+    height: 40px;
+    display: inline-block;
+    width: 100%;
+}
+
+.multi-prompt-wrapper-fixed {
+    vertical-align: middle;
+    text-align: center;
+}
+
+
+
+.multi-prompt-section {
+    margin-bottom: 40px;
+
+}
+
+/* --------------------------------------------- */
+/* Preview Prompt
+/* --------------------------------------------- */
+
+.preview-prompt-table {
+    margin: 10px 0px;
+}
+
+.preview-rating {
+    width: 200px;
+}
+.preview-rating .self-review-rating {
+    color: gray;
+}
+
+.preview-prompt-table thead {
+    background-color: rgb(214, 214, 214);
+    display: table-row-group;
+}
+
+
+.preview-criterion {
+    padding-left: 15px !important;
+}
+
+.preview-prompt-table thead th {
+    vertical-align: middle !important;
+    padding: 0px 5px !important;
+}
+
+.preview-prompt-table thead th h4 {
+    margin: 5px;
+
+}
+
+.preview-prompt-table tbody {
+    border-bottom: 1px solid #ddd;
+
+}
+
+.preview-prompt-table tbody td {
+    padding: 5px 8px !important;
+}
+
+table.review_locked td {
+    cursor: default !important;
+}

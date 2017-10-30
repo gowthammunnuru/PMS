@@ -1,0 +1,192 @@
+<head>
+  <title>perform</title>
+</head>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div class="container-fluid">
+
+  <div class="row">
+    <div width-with-offset=470 class="col-xs-7 home-col">
+      <div class="home-col-card col-user">
+        <center><h3>Personal</h3></center>
+        <div class="row">
+          <div class="banner col-xs-4">
+            <img class="profile-pic" ng-src="/avatar/{{Auth.getUser().uid}}"/>
+            <!-- <img class="profile-pic" ng-src="http://dwskg.anim.dreamworks.com/dreampages/animation/images/{{Auth.getUser().employeeNumber}}.jpg"> -->
+            <center>
+            <div class="fullname">{{Auth.getUser().cn}}</div>
+            <div class="dept">{{Auth.getUser().ou}}</div>
+            </center>
+          </div>
+
+          <div class="col-xs-8 reviews">
+            <h4>Reviews</h4>
+            <span ng-if="!userinfo.years.length" class="no-reviews">No reviews have been setup</span>
+            <div class="years" ng-repeat="year in userinfo.years">
+              <div ng-repeat="(rname, review) in userinfo.reviews.data[year]">
+				<span class="badge year">{{year}}</span>
+                <span class="badge rname">{{rname}}</span>
+                <span class="link self-review review_locked_{{validate(review)}}" ng-click="$state.go('user_self_review_year.start', {'uid': Auth.getUser().uid, 'review_year': year, 'review_name': rname})">Self Review</span> |
+                <span class="link perf-review review_locked_{{review.locked}}" ng-click="goToPublishedReview(Auth.getUser().uid, year, rname)">Performance Review</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tasks col-xs-5 task-col">
+      <div class="task-col-card col-tasks">
+        <center><h3>Tasks</h3></center>
+        <div class="contents">
+
+            <div class="row">
+              <div class="col-xs-1 search" tooltip-append-to-body=true tooltip="Search" ng-click="isFilter = !isFilter; resultFilter.$ = ''">
+                <span class="glyphicon glyphicon-search" ng-class="{'active': isFilter}"></span>
+              </div>
+
+              <div class="col-xs-4 show-archived" ng-click="showArchived = !showArchived">
+                <span class="checkbox">Show Archived ({{len(userinfo.editable.locked)}})
+                  <input ng-click="$event.stopPropagation()" ng-model="showArchived" type="checkbox">
+                </span>
+              </div>
+
+               <div class="col-xs-4 show-statistics" ng-click="showStatistics = !showStatistics">
+                <span class="checkbox">Show Statistics
+                  <input ng-click="$event.stopPropagation()" ng-model="showStatistics" type="checkbox">
+                </span>
+              </div>
+
+               <div class="col-xs-2 show-all" ng-click="toggle = !toggle; selectAll(toggle);">
+
+                <span class="checkbox">All
+                  <input ng-click="selectAll(toggle); $event.stopPropagation()" ng-model="toggle" type="checkbox">
+                </span>
+
+              </div>
+
+              <!-- For User specific stats exapnding-->
+              <div class="col-xs-12" ng-show="showStatistics">
+                <div ng-hide="userinfo.editable.unlocked[1].length">
+                  <hr class="stats-border">
+                  <center>
+                  <div class="no-pending">No Statistics to show.</div>
+                  </center>
+                </div>
+                <div class="col-xs-12">
+                  <div class="progress">
+                    <div ng-click="displayStats('READY2PUBLISH')" tooltip-append-to-body=true tooltip='{{statusCount["READY2PUBLISH"]}} ready to publish' style='width: {{percentage["READY2PUBLISH"]}}%' class='progress-bar progress-bar-almost-success' role='progressbar' aria-valuenow='60' aria-valuemin='0' aria-valuemax='100'></div>
+                    <div ng-click="displayStats('COMMIT_REVIEW')" tooltip-append-to-body=true tooltip='{{statusCount["COMMIT_REVIEW"]}} committed' style='width: {{percentage["COMMIT_REVIEW"]}}%' class='progress-bar progress-bar-primary' role='progressbar' aria-valuenow='60' aria-valuemin='0' aria-valuemax='100'></div>
+                    <div ng-click="displayStats('REVIEW_DRAFT')" tooltip-append-to-body=true tooltip='{{statusCount["REVIEW_DRAFT"]}} in progress' style='width: {{percentage["REVIEW_DRAFT"]}}%' class='progress-bar progress-bar-progress' role='progressbar' aria-valuenow='60' aria-valuemin='0' aria-valuemax='100'></div>
+                    <div ng-click="displayStats('SETUP_DONE')" tooltip-append-to-body=true tooltip='{{statusCount["SETUP_DONE"]}} yet not started' style='width: {{percentage["SETUP_DONE"]}}%' class='progress-bar progress-bar-danger' role='progressbar' aria-valuenow='60' aria-valuemin='0' aria-valuemax='100'></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Filter input box -->
+              <div class="col-xs-12" ng-show="isFilter">
+                <input ng-show="len(userinfo.editable.unlocked)"  showautofocus="isFilter" type="text" class="input-xs filter" ng-model="resultFilter.$" placeholder="Search .."/>
+                <div ng-hide="len(userinfo.editable.unlocked)">
+                  <center><span class="no-pending">No tasks to search from</span></center>
+                </div>
+              </div>
+
+              <!-- [review, self-review] -->
+              <div class="tab" ng-repeat="editable in userinfo.editable.unlocked">
+                <div ng-click="goToReview(review)" ng-repeat="review in (filteredReviews.active_results[$index] = (editable |  orderBy:'datetime':true | MultipleKeywordFilter: resultFilter))">
+                  <div ng-class="{'selected': review.selected}" class="item item_{{review.review_type}}">
+                    <div ng-click="selectReview(tabIndex, $index, review); $event.stopPropagation()" class="checkbox">
+                      <input ng-click="selectReview(tabIndex, $index, review, true); $event.stopPropagation()" ng-model="review.selected" type="checkbox">
+                    </div>
+                    <img class="avatar" ng-src="/avatar/{{review.uid}}">
+                    <!-- <img class="avatar" ng-src="http://dwskg.anim.dreamworks.com/dreampages/animation/images/{{review.user.employeeNumber}}.jpg"> -->
+                    <span ng-hide="review.review_type == 'self-review'" class="name">{{review.user.cn}}</span>
+                    <span ng-show="review.review_type == 'self-review'" class="name">My Self Review</span>
+                    <span ng-show="review['self-review'].locked" tooltip-append-to-body=true tooltip="Self-review is available" class="rightside icons glyphicon glyphicon-user"></span>
+                    <span ng-hide="review.locked || review.committed" tooltip-append-to-body=true tooltip="{{getCompletedPercentage(review)}}% completed" class="rightside percentage text percentage_bucket_{{getCompletedPercentage(review, true)}}">{{getCompletedPercentage(review)}}%</span>
+                    <span tooltip-append-to-body=true tooltip="Delivered" ng-show="review.locked" class="rightside icons glyphicon glyphicon-ok"></span>
+                    <span tooltip-append-to-body=true tooltip="Waiting for HR" ng-show="!review.locked && review.committed && (review.change_type != 'READY2PUBLISH')" class="rightside icons glyphicon glyphicon-time"></span>
+                    <span tooltip-append-to-body=true tooltip="Completed" ng-show="!review.locked && review.committed && (review.change_type == 'READY2PUBLISH')" class="rightside icons glyphicon glyphicon-lock"></span>
+                    <span title="Modified {{localtime(review.datetime).calendar()}}" class="time-since">{{localtime(review.datetime).fromNow()}}</span>
+                    <div class="bottombar">
+                      <span class="year badge">{{review.year}}</span>
+                      <span class="rname badge">{{review.rname}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div ng-show="isFilter && (filteredReviews.active_results[0].length == 0 && filteredReviews.active_results[1].length == 0) && len(userinfo.editable.unlocked)">
+                <center>
+                  <span>No active reviews match your query <strong>{{resultFilter.$}}</strong></span>.&nbsp;&nbsp;
+                  <span class="clear-filter" ng-click="resultFilter.$ = ''">Clear</span>
+                </center>
+                <center ng-if="filteredReviews.archived_results[0].length + filteredReviews.archived_results[1].length && !showArchived" class="archived-search-hint">
+                  <hr class="stats-border-search"/>
+                  <span> <strong>{{resultFilter.$}}</strong> matches {{filteredReviews.archived_results[0].length + filteredReviews.archived_results[1].length}} archived <span ng-pluralize count="filteredReviews.archived_results[0].length + filteredReviews.archived_results[1].length" when="{1: 'review', 'other': 'reviews'}"></span>.</span>
+                </center>
+              </div>
+
+              <div ng-hide="len(userinfo.editable.unlocked)">
+                <center>
+                <div class="no-pending">No pending tasks. Enjoy your day!</div>
+                </center>
+              </div>
+
+
+              <hr ng-if="showArchived">
+
+              <div ng-hide="len(userinfo.editable.locked) || !showArchived">
+                <center>
+                <div>No archived tasks.</div>
+                </center>
+              </div>
+
+              <div ng-show="showArchived" class="tab archived" ng-repeat="editable in userinfo.editable.locked">
+
+                <div ng-click="goToReview(review)" ng-repeat="review in (filteredReviews.archived_results[$index] = (editable | orderBy:'datetime':true | MultipleKeywordFilter: resultFilter))">
+                  <div ng-class="{'selected': review.selected}" class="item">
+                    <div ng-click="selectReview(tabIndex, $index, review); $event.stopPropagation()" class="checkbox">
+                      <input ng-click="selectReview(tabIndex, $index, review, true); $event.stopPropagation()" ng-model="review.selected" type="checkbox">
+                    </div>
+                      <img class="avatar" ng-src="/avatar/{{review.uid}}">
+                      <span ng-hide="review.review_type == 'self-review'" class="name">{{review.user.cn}}</span>
+                      <span ng-show="review.review_type == 'self-review'" class="name">My Self Review</span>
+                      <span tooltip-append-to-body=true tooltip="Delivered" ng-show="review.locked && review.review_type != 'self-review'" class="rightside icons glyphicon glyphicon-ok"></span>
+                      <span tooltip-append-to-body=true tooltip="Completed" ng-show="!review.locked && review.committed" class="rightside icons glyphicon glyphicon-lock"></span>
+                      <span class="time-since">{{localtime(review.datetime).fromNow(true)}}</span>
+                      <div class="bottombar">
+                        <span class="year badge">{{review.year}}</span>
+                        <span class="rname badge">{{review.rname}}</span>
+                        <span ng-show="review.review_type == 'self-review'"class="self-review badge">self-review</span>
+                      </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div ng-show="showArchived && isFilter && (filteredReviews.archived_results[0].length == 0 && filteredReviews.archived_results[1].length == 0)">
+                <center><span>Nothing found for <strong>{{resultFilter.$}}</strong> in archived reviews.</span>&nbsp;&nbsp;</center>
+              </div>
+
+              <div ng-click="goToMultiReview(selected)" ng-show="selected.length>1" class="multi-review"><center><span class="glyphicon glyphicon-duplicate"></span>Review ({{selected.length}})</center></div>
+            </div>
+
+            <div ng-click="leaveFeedback()" class="workflow">
+              <center>
+                <span class="glyphicon glyphicon-pencil glyphicon-workflow"></span>
+                <span class="text">Leave feedback for someone</span>
+              </center>
+            </div>
+
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

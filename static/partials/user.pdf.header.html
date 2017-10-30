@@ -1,0 +1,28 @@
+<preview-header>
+    <div class='preview_header_wrapper'>
+        <div class='topbar'>
+            <div class='left'>
+                {%if timeline['ACKNOWLEDGE_REVIEW'] %}
+                  <img src='http://{{host}}:{{port}}/static/media/dwa.logo.png' />
+                {% else %}
+                  <img src='http://{{host}}:{{port}}/static/media/dwa.logo.bw.png' />
+                {% end %}
+            </div>
+            <div class='right'>
+                <h2>{{review_desc}}</h2>
+            </div>
+        </div>
+        <div class='bottombar'>
+            <div class='left'>
+                <div>
+                    <span class='name'>{{reviewuser_name}}</span>
+                    <span class='desig'>{{user_designation}}</span>
+                </div>
+            </div>
+            <div class='right'>
+                <div class='reviewer'>{{reviewed_by}}</div>
+            </div>
+        </div>
+    </div>
+</preview-header>
+

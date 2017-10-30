@@ -1,0 +1,49 @@
+.ninebox_wrapper {
+  margin-top: 70px;
+}
+.ninebox_wrapper .panel {
+  padding: 10px;
+  box-shadow: 0 0 0 1px #d1d1d1,0 0 4px 1px #ccc;
+  background-color: white;
+  height: 50px;
+}
+.ninebox_wrapper .panel .heading {
+  margin: 0px;
+  font-size: 25px;
+  position: relative;
+  top: -4px;
+}
+.ninebox_wrapper .panel .year-rname {
+  font-size: 20px;
+  margin-left: 15px;
+  position: relative;
+  top: -4px;
+}
+.ninebox_wrapper .panel .btn-adjust-weights {
+  float: right;
+  margin-right: 20px;
+  background-color: #7E57C2;
+  color: white;
+  font-size: 12px;
+  padding: 5px 10px;
+  outline: none;
+}
+.ninebox_wrapper .panel .btn-adjust-weights .glyphicon {
+  margin-right: 10px;
+}
+.ninebox_wrapper .panel .btn-adjust-weights.not-selected {
+  background-color: #D1C4E9;
+  color: #7E57C2;
+}
+.ninebox_wrapper .panel .btn-adjust-weights:hover {
+  color: #ffffff;
+  background: #673AB7;
+}
+.ninebox_wrapper .panel .btn-adjust-weights:active {
+  color: #ffffff;
+  background: #673AB7;
+}
+.ninebox_wrapper .panel .btn-adjust-weights:focus {
+  color: #ffffff;
+  background: #673AB7;
+}

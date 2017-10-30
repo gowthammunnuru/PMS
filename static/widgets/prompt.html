@@ -1,0 +1,29 @@
+<table ng-class="{'review_locked': review_locked}" class="prompt-table">
+  <thead ng-style="{'background-color': collapse.state ? white: '#f5f5f5'}">
+    <th class="section-head" ng-click="collapse.state = !collapse.state"><span class="glyphicon {{collapse.icons[collapse.state ? 1 : 0]}}"></span><h4>{{blocktitle}}<h4></th>
+
+
+        <th ng-if="review_type != 'weights-performance' && review_type != 'weights-potential'" ng-repeat="heading in headings">{{heading.name}}<span class="popover-target" popover-title="{{heading.name}}" popover="{{heading.desc}}" popover-trigger="mouseenter" popover-animation=true popover-append-to-body=true>?</span></th>
+        <th ng-if="review_type == 'weights-performance' || review_type == 'weights-potential'" ng-repeat="heading in headings_weights">{{heading.name}}</th>
+
+
+  </thead>
+  <tbody ng-show=collapse.state>
+    <tr ng-class="{'highlight': shouldHighlight(criterion.modelkey)}" ng-repeat="criterion in criteria">
+      <td class="prompt">{{criterion.name}}<span ng-if="criterion.desc" popover-title="{{criterion.name}}" popover="{{criterion.desc}}" popover-trigger="mouseenter" popover-animation=true popover-append-to-body=true class="popover-target">?</span></td>
+
+      <td ng-if="review_type != 'weights-performance' && review_type != 'weights-potential' " ng-click="review_locked || notEditable || setRating(criterion, $index, heading)" ng-mouseout= "review_locked || notEditable || mouseout($event, $index, criterion, heading)" ng-mouseover="review_locked || notEditable || mouseover($event, $index, criterion, heading)" class="prompt-block prompt-block-{{heading.pts}}" ng-repeat="heading in headings">
+
+        <div ng-style="criterion.colors[$index]"><span ng-show="criterion.colorIndex == $index">{{heading.name}}</span></div>
+
+        <div ng-if="overlay.show && review_type == 'review'"ng-style="criterion.selfReviewColors[$index]" class="prompt-block-alt"></div>
+      </td>
+
+      <td ng-if="review_type == 'weights-performance' || review_type == 'weights-potential'" ng-click="review_locked || notEditable || setRating(criterion, $index, heading)" ng-mouseout= "review_locked || mouseout($event, $index, criterion, heading)" ng-mouseover="review_locked || notEditable  || mouseover($event, $index, criterion, heading)" class="prompt-block prompt-block-{{heading.pts}}" ng-repeat="heading in headings_weights"  >
+
+        <div ng-style="criterion.colors[$index]"><span ng-show="criterion.colorIndex == $index">+{{heading.pts}}</span></div>
+      </td>
+
+    </tr>
+  </tbody>
+</table>

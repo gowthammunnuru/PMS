@@ -1,0 +1,81 @@
+textarea.comments {
+  height: 200px;
+  width: 100%;
+  border-color: #c8c8c8;
+  padding: 7px;
+}
+textarea.comments.self-review {
+  background-color: #dcdcdc;
+}
+textarea.comments.highlight {
+  border: 2px solid #ff8e8e;
+}
+textarea.comments:focus {
+  outline: 0;
+}
+.preview-comment-table {
+  margin: 20px 0;
+}
+.preview-comment-table thead {
+  background-color: #d6d6d6;
+  display: table-row-group;
+}
+.preview-comment-table thead th {
+  vertical-align: middle !important;
+  padding: 0 5px !important;
+}
+textarea.preview-comments {
+  height: auto;
+  width: 100%;
+  border: none;
+}
+comment {
+  display: block;
+}
+comment div {
+  word-break: keep-all;
+}
+.multi-comments {
+  width: 300px;
+  height: 200px;
+  border-color: gray;
+  padding: 5px;
+}
+.multi-comments:focus {
+  outline: 0;
+}
+.multi-comments-readonly {
+  width: 300px;
+  height: 200px;
+  padding: 6px;
+  overflow: auto;
+  border: 1px solid gray;
+}
+.multi-comments-readonly ul li {
+  list-style: disc inside;
+}
+.multi-comments-readonly:focus {
+  outline: 0;
+}
+.multi-header {
+  margin-top: 50px;
+  margin-bottom: 200px;
+}
+.help-dialog {
+  width: 40%;
+}
+.help-dialog .nav-tabs {
+  cursor: pointer;
+}
+.help-dialog .tab-content .equals {
+  font-size: 26px;
+  font-weight: 500;
+  vertical-align: middle;
+}
+.help-dialog .tab-content .markup {
+  vertical-align: middle;
+}
+.help-dialog pre {
+  background-color: white;
+  border: 0;
+}

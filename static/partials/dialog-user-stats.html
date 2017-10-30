@@ -1,0 +1,19 @@
+<div class="dialog">
+	<div class="header align-center"><span>{{loggedUser}} Statistics - {{header_text}}</span></div>
+
+  <div class="body detailed-stats">
+	  <div ng-if='filtered_users.length>0' class='clearfix category complete'>
+      <ul>
+        <li ng-click="goToUserReview(user)" ng-repeat='user in filtered_users track by $index'>
+          <img class='img-responsive img-circle' src='/avatar/{{user.uid}}' />
+          <!-- <img class='img-responsive img-circle' src='http://dwskg.anim.dreamworks.com/dreampages/animation/images/{{user.employeeNumber}}.jpg' /> -->
+          {{user.user.cn}}
+        </li>
+      </ul>
+    </div>
+    <div class="buttons">
+    <button ng-disabled='missingModelKeys.length' ng-click="ok()" class="btn btn-sm btn-ok">Close</button>
+    </div>
+
+  </div>
+</div>

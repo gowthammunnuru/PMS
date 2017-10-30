@@ -1,0 +1,24 @@
+<head>
+  <title>Setup - Templates - perform</title>
+</head>
+<div class="container-fluid">
+  <div class="setup-templates">
+
+    <div class="panel">
+      <span class="glyphicon glyphicon-chevron-left back-to-setup templates" tooltip="Go back" ng-click="$state.go('admin.landing')"></span>
+      <span class="heading">Setup Templates</span>
+      <span class="year-rname">{{review_year}}/{{review_name}}</span>
+    </div>
+
+    <div class="item"  ng-click="setupAndPreview(template)" ng-repeat="(id, template) in allTemplates">
+      <span tooltip="Lead Template" tooltip-append-to-body=true ng-class="{'active': template.contents.is_lead}" class="glyphicon glyphicon-bookmark is-lead"></span>
+      <span class="id">{{template.id}}</span>
+
+      <span class="criteria-count" tooltip="{{template.contents.modelkeys.length}} criteria">{{template.contents.modelkeys.length}} <span class="glyphicon glyphicon-align-left"></span></span>
+
+      <span class="preview" tooltip="Preview and Setup Weightage" tooltip-append-to-body=true><span class="glyphicon glyphicon-chevron-right"></span></span>
+
+    </div>
+  </div>
+
+</div>

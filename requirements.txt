@@ -1,0 +1,12 @@
+BeautifulSoup==3.1.0.1
+elasticsearch==1.4.0
+meld3==0.6.10
+path==2.1
+pymongo==2.7.2
+pytz==2015.4
+requests==2.6.0
+supervisor==3.0a12
+tornado==2.2.1
+urllib3==1.9
+wsgiref==0.1.2
+python-ldap==2.4.15

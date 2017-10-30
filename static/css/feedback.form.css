@@ -1,0 +1,84 @@
+.feedback-form-row {
+  /*
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    */
+  margin: 10px 0px 50px 0px;
+}
+.feedback-form-row .feedback-form-card {
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.0470588) 0px 2px 3px 0px;
+  background-color: white;
+  height: 100%;
+  border: 1px solid #dcdcdc;
+}
+.feedback-form-row .feedback-form-card .feedback-form-name {
+  top: 4px;
+  position: relative;
+  font-size: 20px;
+}
+.feedback-form-row .feedback-form-card .picture {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0px 10px;
+}
+.feedback-form-row .feedback-form-card .topbar {
+  cursor: pointer;
+}
+.feedback-form-row .feedback-form-card .previous-feedback {
+  border-top: 1px solid #ebebeb;
+  border-bottom: 1px solid #ebebeb;
+  padding: 5px;
+  background-color: #f5f5f5;
+  color: #afafaf;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.feedback-form-row .feedback-form-card .previous-feedback:hover {
+  background-color: #ebebeb;
+  color: #646464;
+}
+.feedback-form-row .feedback-form-card .previous-feedback .item {
+  padding: 25px 5px 5px 5px;
+  white-space: pre;
+  word-wrap: break-word;
+  border-top: 1px solid #dcdcdc;
+  margin-top: 3px;
+}
+.feedback-form-row .feedback-form-card .previous-feedback .item:hover {
+  background-color: #F0F0F0;
+}
+.feedback-form-row .feedback-form-card .previous-feedback .time-since {
+  margin-right: 10px;
+  padding-top: 5px;
+}
+.feedback-form-row .feedback-form-card .btn-feedback-form {
+  padding: 5px 10px;
+}
+.feedback-form-row .feedback-form-card .btn-commit {
+  background-color: #009688;
+  color: white;
+  margin-right: 5px;
+}
+.feedback-form-row .feedback-form-card .btn-commit:hover {
+  background-color: #00796b;
+}
+.feedback-form-row .feedback-form-card .btn-commit .glyphicon {
+  margin-right: 5px;
+}
+.feedback-form-row .feedback-form-card .more {
+  margin: 15px 5px 0px 10px;
+  color: #c8c8c8;
+  cursor: pointer;
+}
+.feedback-form-row .feedback-form-card .more:hover {
+  color: #646464;
+}
+.feedback-form-row .feedback-form-card textarea {
+  margin-top: 10px;
+  border-color: #c8c8c8;
+  padding: 5px;
+}

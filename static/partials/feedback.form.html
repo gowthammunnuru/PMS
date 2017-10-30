@@ -1,0 +1,40 @@
+<head>
+  <title>perform</title>
+</head>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div class="container-fluid">
+
+  <div ng-repeat="feedback in feedbacks" class="feedback-form-row row">
+    <div class="col-xs-12">
+      <div class="feedback-form-card">
+        <div class="topbar" ng-click="feedback.minimize = !feedback.minimize">
+          <img class="picture" src="/avatar/{{feedback.user.uid}}">
+          <!-- <img class="picture" src="http://dwskg.anim.dreamworks.com/dreampages/animation/images/{{empNumber}}.jpg"> -->
+          <span class="feedback-form-name">{{feedback.user.cn}}</span>
+          <span class="right more"><span class="glyphicon glyphicon-chevron-down"></span></span>
+          <button ng-click="addFeedback($index, latest_feedbacks[feedback.uid], 'ADD_FEEDBACK'); $event.stopPropagation()" ng-disabled="!latest_feedbacks[feedback.uid].feedback_body" class="right btn-feedback-form btn-commit btn btn-sm"><span class="glyphicon glyphicon-ok"></span>{{latest_feedbacks[feedback.uid].btnTexts.commit}}</button>
+          <button ng-click="addFeedback($index, latest_feedbacks[feedback.uid], 'SAVE_DRAFT'); $event.stopPropagation()" ng-disabled="!latest_feedbacks[feedback.uid].feedback_body" class="right btn-feedback-form btn-commit btn btn-sm"><span class="glyphicon glyphicon-floppy-disk"></span>{{latest_feedbacks[feedback.uid].btnTexts.save}}</button>
+        </div>
+
+        <div ng-style="{'background-color': feedback.showPreviousFeedback ? 'rgb(245, 245, 245)': '', 'color': feedback.showPreviousFeedback ? 'rgb(100, 100, 100)' :''}" ng-hide="feedback.minimize" ng-click="feedback.showPreviousFeedback = !feedback.showPreviousFeedback" class="previous-feedback">
+          <center ng-hide="feedback.showPreviousFeedback">{{feedback.feedbacks.length}} previous feedbacks</center>
+          <center ng-show="feedback.showPreviousFeedback">Hide previous feedbacks</center>
+          <div ng-click="$event.stopPropagation()" ng-repeat="prevFeedback in feedback.feedbacks" ng-show="feedback.showPreviousFeedback">
+            <div class="pull-right time-since">{{localtime(prevFeedback.datetime).fromNow()}}</div>
+            <div class="item" ng-bind=prevFeedback.feedback_body></div>
+          </div>
+        </div>
+        <div ng-hide="feedback.minimize">
+        <textarea ng-model="latest_feedbacks[feedback.uid].feedback_body" class="comments" placeholder="Leave feedback for {{feedback.user.cn}}"></textarea>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

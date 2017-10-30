@@ -1,0 +1,25 @@
+
+.btn-req-access {
+    background-color: #009688;
+    color: white;
+    border-radius: 0px;
+}
+
+.btn-req-access:hover {
+    background-color: #00897b;
+    color: white;
+}
+
+.btn-goback {
+    border-radius: 0px;
+}
+
+.autherror-buttons {
+    margin-bottom: 10px;
+
+}
+
+.invalid-url {
+    padding: 1px 5px;
+    color: #009688;
+}

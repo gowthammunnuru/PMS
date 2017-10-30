@@ -1,0 +1,28 @@
+<br>
+<br>
+<br>
+<head>
+  <title>Access Denied - perform</title>
+</head>
+<div>
+  <div class="container-fluid">
+    <div class="jumbotron">
+      <center>
+        <h1>Woa! Stay right there.</h1>
+        <h4 ng-show=url>You don't have permissions to access <span class="invalid-url">{{url}}</span></h4>
+        <h4 ng-hide=url>You don't have permissions to access this.<span class="invalid-url">{{url}}</span></h4>
+        <div class="autherror-buttons">
+          <button class="btn tn-req-access" ng-click="$state.go('landing.home')">Go home</button>
+        </div>
+      </center>
+      <div class="well">
+        <center>
+          <img ng-src={{image}} class="img-responsive img-thumbnail">
+        </center>
+      </div>
+      <center>
+        <h4></h4>
+      </center>
+    </div>
+  </div>
+</div>

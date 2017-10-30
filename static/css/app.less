@@ -1,0 +1,198 @@
+@font-face {
+    font-family: 'PT Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('PT Sans'), local('PTSans-Regular'), url(/static/external/ptsans.woff) format('woff');
+}
+
+@rnameBadgeColor: #9575cd;
+@selfReviewBadgeColor: #4db6ac;
+@yearBadgeColor: #90a4ae;
+
+
+body, h1, h2, p {
+    font-family: 'PT Sans' !important;
+}
+
+body {
+    background-color: rgb(238, 238, 238);
+}
+
+.left {
+    float: left;
+}
+.logoimg {
+    height: 32px;
+    width: 32px;
+    position: absolute;
+    top: 9px;
+    left: 15px;
+    background-image: url("../media/images/logo.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    cursor: pointer;
+    transition: background-image ease-in-out 100ms;
+}
+.navbar-brand:hover {
+    color: white;
+}
+.navbar-brand {
+    margin-left: 2px !important;
+    cursor: pointer;
+    display: block;
+    max-width: 500px;
+    padding: 15px 38px;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 20px;
+    color: white;
+    text-align: center;
+}
+.logo:hover .logoimg, .logo:hover .a {
+    background-image: url("../media/images/logo_hover.png");
+}
+.navbar {
+    min-height: 50px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-bottom: 20px;
+    background-color: #009688;
+    border-top: 10px solid #00796b;
+    box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.3);
+}
+.navbar-fixed-top, .navbar-fixed-bottom {
+    position: fixed;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+    border-radius: 0;
+}
+.navbar-item {
+    display: block;
+    padding: 15px 15px;
+    margin-right: auto;
+    line-height: 20px;
+    color: white;
+    position: relative;
+    .caret {
+        border-top-color    : white;
+        border-bottom-color : white;
+        margin-left: 7px;
+    }
+}
+.dropdown-menu {
+    & > li {
+        cursor: pointer;
+        & > a:hover {
+            background-color: #ffa000;
+            color: white;
+        }
+    }
+
+	  & > .active{
+	  	& > a, > a:hover, > a:focus{
+			color: #fff;
+			text-decoration:none;
+			background-color: #ffa000;
+			outline: 0;
+		}
+
+	  }
+}
+.navbar-item:hover {
+    color: #ffa000;
+    cursor: pointer;
+    .caret {
+        border-top-color    : #ffa000;
+        border-bottom-color : #ffa000;
+    }
+}
+a:hover {
+    color: #ff4081;
+}
+
+.badge, .label {
+    border-radius: 0px;
+}
+
+.year {
+    background-color: @yearBadgeColor;
+}
+
+.rname.badge {
+    background-color: @rnameBadgeColor;
+    margin: 0px 0px;
+    }
+
+.self-review.badge {
+    background-color: @selfReviewBadgeColor;
+
+    }
+
+// Loading Bar
+
+.loading, .loading span {
+    position: fixed;
+    top: 57px;
+    height: 4px;
+    transition: width ease-in-out 500ms, margin-left ease-in-out 500ms;
+    z-index: 9999;
+
+    &.bar1 {
+        transition: none;
+        width: 100%;
+        }
+
+    &.bar2 {
+        margin-left: 50%;
+        width: 0%;
+        }
+}
+
+
+.initial-hide {
+    opacity: 0;
+}
+
+.top-banner {
+    margin-top: 25px;
+    z-index: 10000;
+    font-size: 12px;
+    background-color: #F44336;
+    color: white;
+    height: 23px;
+    position: fixed;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3);
+
+    p {
+        padding: 2px;
+
+        span {
+            margin-right: 5px;
+
+            &.reload {
+                cursor: pointer;
+
+                &:hover {
+                    text-decoration: underline;
+                    }
+                }
+            }
+    }
+}
+
+.input-xs {
+    outline: 0;
+    border: 1px solid rgb(200, 216, 255);
+    width: 100%;
+    font-weight: normal;
+    padding-left: 10px;
+    margin-top: 10px;
+    color: #333;
+
+    &:active, &:focus {
+        border: 1px solid rgb(165, 191, 255);
+        }
+}

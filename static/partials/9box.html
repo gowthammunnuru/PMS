@@ -1,0 +1,23 @@
+<head>
+  <title>9 Box - perform</title>
+</head>
+<div ng-mouseover="enableAutoUpdate()" class="container-fluid">
+  <div class="ninebox_wrapper">
+
+
+    <div class="panel">
+      <span class="glyphicon glyphicon-chevron-left back-to-setup templates" tooltip="Go back" ng-click="$state.go('admin.landing')"></span>
+      <span class="heading">9 Box Ratings</span>
+      <span class="year-rname">{{review_year}}/{{review_name}}</span>
+      <button class="btn btn-ok btn-adjust-weights" ng-click="setupAndPreview(template)"><span class="glyphicon glyphicon-pencil"></span>Edit Weights</button>
+    </div>
+
+    <div class="row">
+      <div class="ninebox_element_wrapper col-xs-10 col-xs-offset-1">
+          <ninebox cellheight=300px></ninebox>
+      </div>
+    </div>
+
+  </div>
+</div>
+

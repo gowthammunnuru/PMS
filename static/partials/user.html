@@ -1,0 +1,205 @@
+<head>
+  <title>{{user.cn}} - {{review_year}}/{{review_name}} - perform</title>
+</head>
+
+<div>
+
+  <div ng-mouseover="enableAutoUpdate()" ng-class="{'disable-review': !isAutoUpdating()}" class="container-fluid">
+
+    <div class="row">
+      <div ng-click="headerExpanded = !headerExpanded" ng-class="{'review_header_wrapper-expanded': headerExpanded, 'col-xs-11': feedback.show, 'col-xs-10': !feedback.show, 'push-to-left': feedback.show, 'col-xs-offset-1': !feedback.show}" class="review_header_wrapper">
+        <div class="left">
+          <span class="item avatar" ng-class='{"hide-me": headerExpanded}'>
+            <img ng-src="/avatar/{{user.uid}}" />
+            <!-- <img ng-src="http://dwskg.anim.dreamworks.com/dreampages/animation/images/{{user.employeeNumber}}.jpg" /> -->
+          </span>
+          <span class="item name">{{user.cn}}</span>
+          <span class="item dept">{{user.ou}}</span>
+          <span ng-if="!restrictedAccess && !review_packet.locked && !review_packet.committed" class="item save-status" title="Automatically saved every {{save.freq}} seconds. {{save.last_str}}">{{save.status}}</span>
+          <span ng-if="!restrictedAccess && review_packet.committed && !review_packet.locked" class="item save-status" title="{{save.publish_date}}">Committed on {{save.date_str}}</span>
+          <span ng-if="!restrictedAccess && review_packet.locked && review_type == 'review'" class="item save-status" title="{{save.publish_date}}">Published on {{save.date_str}}</span>
+          <span ng-if="!restrictedAccess && review_packet.locked && review_type == 'self-review'" class="item save-status" title="{{save.publish_date}}">Completed on {{save.date_str}}</span>
+        </div>
+
+        <div class="right">
+
+          <span ng-show="!restrictedAccess && review_type == 'review' && !review.committed" class="item user review_type_{{review_type}}" ng-class='{"active": overlay.show, "button-disabled": save.status=="Editing .."|| save.status=="Updating .."}'  class="item send review_type_{{review_type}}" ng-click=" releaseBusyBtn(); $event.stopPropagation()" tooltip="Release review for someone else" tooltip-append-to-body=true><span class="glyphicon glyphicon-eye-open"></span>Busy</span>
+
+          <span ng-show="!restrictedAccess && review_type == 'review'" ng-click="showOverlay();  $event.stopPropagation()" class="item user review_type_{{review_type}}" ng-class='{"active": overlay.show, "button-disabled": !selfReview.locked }' tooltip="{{ (selfReview.locked) ? 'Show self-review' : user.cn.split(' ')[0] + ' has not committed the self review.'}}" tooltip-append-to-body=true><span class="glyphicon glyphicon-user"></span></span>
+
+          <span ng-show="!restrictedAccess && review_type == 'review'" ng-click="showFeedback(); $event.stopPropagation()" class="item user review_type_{{review_type}}" ng-class='{"active": feedback.show,"button-disabled": review_payload.feedbacks.length == 0 }' tooltip="Show feedbacks ({{review_payload.feedbacks.length}})" tooltip-append-to-body=true><span class="glyphicon glyphicon-comment"></span></span>
+
+          <span class="item print review_type_{{review_type}}" ng-class="{'button-disabled':(save.status=='Editing ..'|| save.status=='Updating ..' ) && !review.locked }"   ng-click="previewReview(review, review_type); $event.stopPropagation()"  tooltip='{{btnHover["review_and_print_" + review_type]}}' tooltip-append-to-body=true><span class="glyphicon glyphicon-{{btnIcons['review_and_print_' + review_type]}}"></span>{{btnTexts["review_and_print_" + review_type]}}</span>
+
+          <span ng-hide="restrictedAccess" ng-class="{'button-disabled1': review_type == 'review' && ((review_packet.locked && !valid_commitbtn_hover) || (review_packet.committed && !valid_commitbtn_hover)) || review_type == 'self-review' && ((review_packet.committed && !valid_commitbtn_hover) ||(!review_packet.committed && Auth.getUser().uid != user.uid))|| ((save.status=='Editing ..'|| save.status=='Updating ..') && !review.locked ) }" ng-mouseover="enableCommitBtnOnHover() && (valid_commitbtn_hover = true)" ng-mouseleave="valid_commitbtn_hover=false" class="item send review_type_{{review_type}}" ng-click="commitButtonClicked(); $event.stopPropagation()" tooltip="{{btnHover['committed_' + review_packet.committed +'_' + valid_commitbtn_hover]}}" tooltip-append-to-body=true><span class="glyphicon glyphicon-{{btnIcons['committed_' + review_packet.committed +'_'+valid_commitbtn_hover]}}"></span>{{btnTexts["committed_" + review_packet.committed + "_" + valid_commitbtn_hover]}}</span>
+
+          <span ng-if="!restrictedAccess && review_type == 'review'" ng-class="{'button-disabled': (review_packet.locked || !review_packet.committed || !Auth.isAdmin()) && (review.change_type != 'READY2PUBLISH')|| save.status=='Editing ..'|| save.status=='Updating ..'}" class="item publish review_type_{{review_type}}" ng-click="publishButtonClicked(); $event.stopPropagation()" tooltip="{{btnHover['committed_' + review_packet.committed + '_locked_' +  review_packet.locked + '_ready_' + (review.change_type == 'READY2PUBLISH') + '_admin_' + Auth.isAdmin()]}}" tooltip-append-to-body=true><span class="glyphicon glyphicon-{{btnIcons['committed_' + review_packet.committed + '_locked_' + review_packet.locked + '_ready_' + (review.change_type == 'READY2PUBLISH') + '_admin_' + Auth.isAdmin()]}}"></span>{{btnTexts["committed_" + review_packet.committed + "_locked_" + review_packet.locked + "_ready_" + (review.change_type == "READY2PUBLISH") + "_admin_" + Auth.isAdmin()]}}</span>
+          <span ng-show="acknowledgeReview && review_type == 'review' " class="item publish review_type_{{review_type}}" ng-click="acknowledgeCurrentReview(Auth.getUser().uid, review.rname, review.year); $event.stopPropagation()">Acknowledge Review</span>
+          <span class="moredetails glyphicon glyphicon-chevron-{{['down', 'up'][headerExpanded + false]}}"></span>
+
+        </div>
+
+        <div ng-click="$event.stopPropagation()" class="contents row">
+
+          <div class="col-xs-2 left-sidebar">
+            <img ng-src="/avatar/{{user.uid}}">
+            <!-- <img ng-src="http://dwskg.anim.dreamworks.com/dreampages/animation/images/{{user.employeeNumber}}.jpg" /> -->
+          </div>
+
+          <div class="col-xs-6 middle-sidebar">
+            <div class="wrapper">
+              <div ng-if="!restrictedAccess && review_type == 'review'" >
+                  <span tooltip-append-to-body=true tooltip="{{ (selfReview.locked) ? '' : user.cn.split(' ')[0] + ' has not committed the self review.'}}" ng-click="selfReview.locked; showOverlay()" ng-class="{'self-review-notlocked': !selfReview.locked}">
+
+                    <span class="glyphicon glyphicon-{{['unchecked', 'check'][!!overlay.show + false]}}"></span>Show self-review</span>
+                <span ng-show="selfReview.locked" ng-click="goToSelfReview()" tooltip-append-to-body=true tooltip="Go to self-review" class="glyphicon glyphicon-link icon-go2selfreview"></span>
+
+                <span tooltip-append-to-body=true ng-click="sendSelfReviewReminder(user)" tooltip="Remind {{user.cn.split(' ')[0]}} about self review" ng-hide="reminderSent" class="remind-self-review-button" ng-if="!selfReview.locked">    <span class="glyphicon glyphicon-send"></span>Remind
+                    </span>
+              </div>
+
+              <div ng-if="!restrictedAccess && review_type == 'review'" ng-click="!!review_payload.feedbacks.length && (feedback.no_transition = false); !!review_payload.feedbacks.length; showFeedback()"><span ng-class="{'self-review-notlocked': review_payload.feedbacks.length == 0}"><span class="glyphicon glyphicon-{{['unchecked', 'check'][!!feedback.show + false]}}"></span>Show feedbacks ({{review_payload.feedbacks.length}})</span></div>
+            </div>
+          </div>
+
+
+          <div class="col-xs-4 right-sidebar">
+            <div ng-if="review_type == 'review'" class="collab">
+                <span> <span ng-show="!restrictedAccess" tooltip-append-to-body=true tooltip="{{['Add a reviewer', 'Add a contributor'][collabPaneIndex]}}" ng-click="showAddCollaborators = !showAddCollaborators; $event.stopPropagation()" class="add-collab glyphicon glyphicon-{{['plus-sign', 'minus-sign'][showAddCollaborators + false]}}"></span>
+                  <span ng-class="{'active-pane': !collabPaneIndex}"  ng-click="collabPaneIndex = 0" class="reviewers">Reviewers ({{getReviewers().length}})</span>
+                  <span ng-class="{'active-pane': !!collabPaneIndex}" ng-click="collabPaneIndex = 1" class="contributors">Contributors ({{review_payload.contributors.length}})</span>
+                </span>
+
+              <div>
+                <div class="collab-input" ng-if="showAddCollaborators">
+                  <div class="collaborator">
+                    <span class="glyphicon glyphicon-{{['pencil', 'user'][collabPaneIndex]}}"></span>
+                    <input class="input-xs"
+                           ng-keyup="addCollaborator(collabPaneIndex, $event, collab.user);"
+                           typeahead="name for name in fullnames | filter: $viewValue |  filter:'!'+user.cn | AddedReviewersFilter :getCurrentReviewersAndCollaborators():fullnameToUidMap"
+                           typeahead-min-length="2"
+                           ng-model="collab.user"
+                           placeholder="{{['Add reviewer', 'Add contributor'][collabPaneIndex]}} ..">
+                  </div>
+                </div>
+
+                <div class="people">
+                  <div ng-show="collabPaneIndex == 0" class="collaborator reviewer" ng-repeat="reviewer in getReviewers()">
+                    <span class="glyphicon glyphicon-pencil"></span>{{reviewer.cn}}
+                    </span>
+                  </div>
+
+                  <div ng-show="collabPaneIndex == 1" class="collaborator reviewer" ng-repeat="contributor in review_payload.contributors">
+                    <span class="glyphicon glyphicon-user"></span>{{contributor.cn}}
+                    <span ng-if="!restrictedAccess && (contributor.uid != Auth.getUser().uid)" ng-click="removeCollaborator(collabPaneIndex, contributor.uid)" class="glyphicon glyphicon-remove remove-collab" tooltip-append-to-body=true tooltip="Remove"></span>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
+            <div class="bottomstrip">
+              <span class="template_id">Review form template: {{template_id}}</span>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row" ng-if="review_type != 'self-review' && allReviews.length>=2">
+      <div ng-class="{'col-xs-11': feedback.show, 'col-xs-10': !feedback.show, 'push-to-left': feedback.show, 'col-xs-offset-1': !feedback.show, 'no_transition': feedback.no_transition}"
+           class="review_tabs_wrapper">
+        <div class="tabs">
+          <center>
+            <div class="yearDisplayBar">
+                <span class="switch-tabs nav-tabs-justified"
+                      ng-repeat="review in allReviews | orderBy:order"
+                      ng-click="switchReview(review.year, review.name)"
+                      ng-class="{'active': review.year == review_year && review.name == review_name}">
+                  {{review.year + "/" + review.name}}
+                </span>
+            </div>
+          </center>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div ng-class="{'col-xs-11': feedback.show, 'col-xs-10': !feedback.show, 'push-to-left': feedback.show, 'col-xs-offset-1': !feedback.show, 'no_transition': feedback.no_transition}"
+           class="section_tabs_wrapper">
+        <center >
+          <div class="tabs">
+            <span ng-repeat="section in sections | orderBy:'order'"
+                  class="switch-tabs"
+                  ng-click="switchSection(section)"
+                  ng-class="{'active': sectionName == section.name}">
+              {{section.blocktitle}}
+            </span>
+          </div>
+        </center>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div ng-class="{'col-xs-7': feedback.show, 'col-xs-10': !feedback.show, 'push-to-left': feedback.show, 'col-xs-offset-1': !feedback.show, 'no_transition': feedback.no_transition }"
+           class="review_wrapper">
+
+        <div class="row">
+
+          <center>
+            <div class="alert alert-warning" ng-hide=sections>{{user.cn}}'s review is not ready just yet. Please contact Human Resources.</div>
+          </center>
+          <div class="col-xs-12" ui-view="contents"></div>
+
+        </div>
+
+
+      </div>
+
+      <div ng-if="feedback.show" class="feedback_wrapper col-xs-4">
+
+        <div ng-repeat="(reviewer, feedback_group) in review_payload.feedbacks_grouped">
+
+          <div class="thumbhead" ng-show="feedback_group.thumbhead">
+            <img ng-click="feedback_group.thumbhead = false"
+                 tooltip="{{feedback_group[0].reviewer_user.cn}}"
+                 tooltip-placement="right"
+                 tooltip-append-to-body=true
+                 src="/avatar/{{feedback_group[0].reviewer}}" />
+            <!-- <img ng-click="feedback_group.thumbhead = false"
+                 tooltip="{{feedback_group[0].reviewer_user.cn}}"
+                 tooltip-placement="right"
+                 tooltip-append-to-body=true
+                 src="http://dwskg.anim.dreamworks.com/dreampages/animation/images/{{reviewer.employeeNumber}}.jpg" /> -->
+          </div>
+
+          <div ng-hide="feedback_group.thumbhead"
+               ng-click="feedback_reveals[reviewer][$index]= !feedback_reveals[reviewer][$index] ? $index != feedback_group.length -1 : false"
+               class="item"
+               ng-class="{'item-small': $index != feedback_group.length - 1, 'item-reveal': feedback_reveals[reviewer][$index]}"
+               ng-repeat="feedback in feedback_group">
+
+            <img ng-click="feedback_group.thumbhead = true" src="/avatar/{{feedback.reviewer}}">
+            <!-- <img ng-click="feedback_group.thumbhead = true" src="http://dwskg.anim.dreamworks.com/dreampages/animation/images/{{reviewer.employeeNumber}}.jpg  "> -->
+            <span class="name">{{feedback.reviewer_user.cn}}</span>
+            <span tooltip="Minimize"
+                  ng-click="feedback_group.thumbhead = true"
+                  ng-show="$index == feedback_group.length - 1"
+                  class="thumbhead pull-right">
+              <span class="glyphicon glyphicon-resize-small"></span>
+            </span>
+            <span class="time-since">{{localtime(feedback.datetime).fromNow()}}</span>
+            <div class="feedback_body"><span>{{feedback.feedback_body}}</span></div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,83 @@
+.setup-templates {
+
+    margin-top: 70px;
+
+    .panel {
+        padding: 10px;
+        box-shadow: 0 0 0 1px #d1d1d1,0 0 4px 1px #ccc;
+        background-color: white;
+        height: 50px;
+
+        .heading {
+            margin: 0px;
+            font-size: 25px;
+            position: relative;
+            top: -4px;
+            }
+
+        .year-rname {
+            font-size: 20px;
+            margin-left: 15px;
+            position: relative;
+            top: -4px;
+            }
+        }
+
+    .item {
+        padding: 15px 20px;
+        background-color: white;
+        margin: 5px 0px;
+        box-shadow: 0 0 0 1px #d1d1d1,0 0 4px 1px #ccc;
+        cursor: pointer;
+
+        &:hover {
+            background-color: whitesmoke;
+
+            .preview {
+                display: block;
+                }
+            }
+
+        .preview {
+            display: none;
+            float: right;
+            margin-right: 20px;
+            color: #969696;
+
+            .glyphicon {
+                margin-left: 5px;
+                top: 5px;
+                }
+            }
+
+
+
+        .is-lead {
+            opacity: 0;
+            margin-right: 5px;
+            color: #009688;
+            cursor: default;
+
+            &.active {
+                opacity: 1;
+                }
+            }
+
+        .id {
+            font-size: 20px;
+            width: 200px;
+            display: inline-block;
+            }
+
+        .criteria-count {
+            cursor: default;
+            .glyphicon {
+                margin-right: 10px;
+                font-size: 12px;
+                }
+            }
+
+
+        }
+
+    }

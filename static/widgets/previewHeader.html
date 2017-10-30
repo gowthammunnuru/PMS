@@ -1,0 +1,23 @@
+<div class="preview_header_wrapper">
+	<span ng-click="goToReview(review)" tooltip="Go back" class="glyphicon glyphicon-chevron-left back_button noprint"></span>
+
+	<span ng-click="printReview()" class="noprint glyphicon glyphicon-print self_review"></span>
+  <div class="topbar">
+    <div class="left">
+      <img src="static/media/dwa.logo.png"></img>
+    </div>
+    <div class="right">
+      <h2>{{review_metadata.desc}}</h2>
+  </div>
+  </div>
+  <div class="bottombar">
+    <div class="left">
+		<div><span class="name">{{user.cn}}</span><span class="desig">{{user.ou}}</span>
+		</div>
+    </div>
+    <div class="right">
+      <div ng-if="review_type != 'self-review'" class="reviewer">Reviewed by: <span ng-repeat="collabator in getCollaborators()">{{collabator.cn}}{{$last ? '': ', '}}</span></div>
+      <div ng-if="review_type == 'self-review'" class="reviewer">Self Review</div>
+    </div>
+  </div>
+</div>

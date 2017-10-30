@@ -1,0 +1,28 @@
+<div class="dialog-leave-feedback-wrapper">
+  <div class="header"><span>Leave feedback</span></div>
+
+  <div class="contents">
+  <h4>Whom do you want to leave feedback for?</h4>
+  <span ng-keydown="enterFeedback($event)">
+    <div class="user" ng-repeat="user in users">
+        <img ng-src="/avatar/{{user.uid}}">
+        <!-- <img ng-src="http://dwskg.anim.dreamworks.com/dreampages/animation/images/{{user.employeeNumber}}.jpg"> -->
+        <input autofocus  typeahead-on-select="validateInput(user, user.name)" ng-keydown="keypress($event, user.name, user)" placeholder="Name" class="input-xs" typeahead="name for name in fullnames | filter:$viewValue" typeahead-min-length="2" ng-model=user.name></input>
+        <span ng-click="removeItem(user.uid)" ng-if="okToProceed" class="remove"><span class="glyphicon glyphicon-remove"></span></span>
+        <span class="status" ng-show="showStatusMessage">{{status}}</span>
+    </div>
+
+    <div class="message" ng-show="users[0].uid">
+      <p>Your feedback will be available to {{users[0].name.split(' ')[0]}}'s reviewers. {{users[0].name.split(' ')[0]}} will not see your feedback.</p>
+    </div>
+
+    <div class="bottombar">
+        <div class="buttons">
+            <button ng-click="cancel()" class="btn btn-default btn-sm btn-cancel">Cancel</button>
+            <button ng-disabled="!okToProceed" ng-click="ok()" class="btn btn-default btn-sm btn-ok"><span class="glyphicon glyphicon-pencil"></span>Write feedback</button>
+        </div>
+    <div>
+  </span>
+
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="dialog">
+  <div class="header"><span>{{messages.header}}</span></div>
+
+  <span ng-class="{'warn': missingModelKeys.length, 'active': !missingModelKeys.length}" class="glyphicon glyphicon-{{icons[!!missingModelKeys.length + false]}}"></span>
+
+  <div class="body">
+
+    <div ng-if="!missingModelKeys.length" class="body">{{messages.body}} </div>
+    <div ng-if="missingModelKeys.length" class="body">You're {{completedPercent}}% complete with the review.
+
+      <div class="missing-modelkeys head" ng-hide="{{missingModelKeys.length > 4}}">Missing the following entries</div>
+      <div class="missing-modelkeys" ng-repeat="missingModelKey in missingModelKeys" ng-if="$index < 4"> {{missingModelKey}} </div>
+      <div class="missing-modelkeys tail" ng-show="{{missingModelKeys.length > 4}}">.. and {{missingModelKeys.length - 4}} other entries missing.</div>
+    </div>
+
+        <br ng-if="missingModelKeys.length">
+        <br ng-if="missingModelKeys.length">
+        <br ng-if="missingModelKeys.length">
+        <br ng-if="missingModelKeys.length">
+        <br ng-if="missingModelKeys.length">
+        <br ng-if="missingModelKeys.length">
+        <br ng-if="missingModelKeys.length">
+        <br ng-if="missingModelKeys.length">
+
+    <div class="buttons">
+    <button ng-click="cancel()" class="btn btn-default btn-sm btn-cancel">{{messages.buttons.cancel}}</button>
+    <button ng-disabled='missingModelKeys.length' ng-click="ok()" class="btn btn-default btn-sm btn-ok" ng-class="{'btn-disabled': missingModelKeys.length}">{{messages.buttons.ok}}</button>
+    </div>
+
+  </div>
+</div>

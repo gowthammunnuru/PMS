@@ -1,0 +1,16 @@
+<table class="table preview-prompt-table">
+  <thead>
+    <th><h4>{{blocktitle}}<h4></th>
+    <th>Rating</th>
+  </thead>
+  <tbody>
+    <tr ng-repeat="criterion in criteria">
+      <td class="preview-criterion">{{criterion.name}}</td>
+      <td class="preview-rating" style="width: 200px;">
+        {{getHeading(review[modelkey(criterion.name, "ratings::" + blocktitle)]).name}}
+        <span class="self-review-rating" ng-show="showSelfReview.show">({{getHeading(selfReview.review_body[modelkey(criterion.name, "ratings::" + blocktitle)]).name}})</span>
+      </td>
+      </td>
+    </tr>
+  </tbody>
+</table>

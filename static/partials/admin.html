@@ -1,0 +1,155 @@
+<head>
+  <title>perform</title>
+</head>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div class="container-fluid">
+
+  <div class="row">
+
+    <div class="col-xs-3 setup-col">
+
+      <div class="setup-col-card col-reviews">
+        <center><h3>Reviews</h3></center>
+        <div class="contents">
+          <div class="create_review_type">
+            <div class="create_icon" ng-click="showCreateForm = !showCreateForm"><span tooltip-append-to-body=true tooltip="Create New Review" class="glyphicon glyphicon-{{['plus', 'minus'][showCreateForm + false]}}-sign setup"></span></div>
+            <p class="archive_checkbox pull-right cursor-pointer"> <input type="checkbox" ng-click="show_archived = !show_archived" />Show Archived ({{data.archived_review_types.length}})</p></div>
+
+          <div ng-show="showCreateForm" ng-keydown="keypress($event, review_type_new)" class="review-create-form">
+            <input class="input-xs year-input" placeholder="Year" ng-model="review_type_new.year">
+            <input class="input-xs rname-input" placeholder="Review Description" ng-model="review_type_new.desc">
+            <button class="btn btn-default btn-xs create-btn" ng-disabled="!(review_type_new.year && review_type_new.desc)" ng-click="createReview(review_type_new);">Create</button>
+          </div>
+        <div ng-click='displayStats(review_type)' class="review_type_wrapper selected-review-{{_selected_review_type.rname == review_type.rname && _selected_review_type.year == review_type.year}}" ng-repeat="review_type in data.active_review_types | orderBy: '-year'">
+            <span class="badge year pull-left">{{review_type.year}}</span>
+            <span class="desc" title="{{review_type.rname}}">{{review_type.desc}}<span ng-hide="review_type.desc">{{review_type.rname}}</span></span>
+            <span ng-click='$state.go("admin.reviews", {review_year: review_type.year, review_name: review_type.rname}); $event.stopPropagation()' tooltip-append-to-body=true tooltip="Setup" class="glyphicon glyphicon-cog setup"></span>
+          </div>
+          <hr />
+          <div class='archived'>
+            <div class='clearfix'>
+            </div>
+            <div ng-hide="data.archived_review_types.length || !show_archived">
+                <center>
+                <div>No archived reviews.</div>
+                </center>
+            </div>
+            <div ng-if='show_archived' ng-click='displayStats(review_type)' class="review_type_wrapper selected-review-{{_selected_review_type.rname == review_type.rname && _selected_review_type.year == review_type.year}}" ng-repeat="review_type in data.archived_review_types">
+
+              <span class="badge year">{{review_type.year}}</span>
+              <span class="desc">{{review_type.desc}}</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-9 setup-col">
+
+      <div class="setup-col-card" ng-if="data.review_types.length">
+        <center><h3>Overview</h3></center>
+        <div ng-if="_selected_review_type">
+          <div class="review-statistics stats-top col-xs-10 col-xs-offset-1">
+        <h2>
+                <span class="badge year">{{_selected_review_type.year}}</span>
+                <span>{{_selected_review_type.desc}}</span>
+                <div class="switch-stats">
+                  <span ng-class="{'active': review.type=='review'}" class="review" ng-click="review.type='review'; showDepartmentStats(selectedReview); showOverallStats(selectedReview)"><input type="radio" name="stats" ng-model="review.type" value="review">Reviews</input></span>
+                  <span ng-class="{'active': review.type=='self-review'}" class="selfreview" ng-click="review.type='self-review'; showDepartmentStats(selectedReview); showOverallStats(selectedReview)"><input type="radio" name="stats" ng-model="review.type" value="self-review">Self Reviews</input></span>
+                </div>
+
+                <div class="btn-group pull-right stats-button">
+                    <a class="btn btn-ok btn-templates" ng-href="/training-recommendations?ryear={{_selected_review_type.year}}&rname={{_selected_review_type.rname}} " role="button"><span  class="glyphicon glyphicon-download-alt"></span>Export as Excel-sheet</a>
+
+                    <button type="button" class="btn btn-ok btn-templates" ng-click="$state.go('admin.templates.start', {review_year: _selected_review_type.year, review_name: _selected_review_type.rname});"><span  class="glyphicon glyphicon-list"></span>Templates</button>
+
+                    <button type="button" ng-click='$state.go("admin.reviews", {review_year: _selected_review_type.year, review_name: _selected_review_type.rname}); $event.stopPropagation()' class="btn btn-ok btn-setup"><span class="glyphicon glyphicon-cog"></span>Setup</button>
+                   <button type="button" class="btn btn-ok dropdown-toggle btn-setup" data-toggle="dropdown" aria-expanded="false">
+                      <span class="caret"></span>
+                      <span class="sr-only">Toggle Dropdown</span>
+                   </button>
+          <ul class="dropdown-menu setup-more" role="menu">
+                      <li ng-if='_selected_review_type.status=="active"' class="archive-review"><a href="" ng-click='archiveReview(_selected_review_type); $state.reload()'><span class="glyphicon glyphicon-trash"></span> Archive Review</a></li>
+                      <li ng-if='_selected_review_type.status=="archived"' class="archive-review"><a href="" ng-click='unarchiveReview(_selected_review_type); $state.reload()'><span class="glyphicon glyphicon-trash"></span> Unarchive Review</a></li>
+          </ul>
+        </div>
+              </h2>
+
+              <div ng-if="review.type == 'review'">
+                <div class='clearfix count'>
+                  <span class='overall_count pull-right'>
+                      <span tooltip='{{overall_count[selectedReview]["ACKNOWLEDGE_REVIEW"]}} acknowledged' class='label label-info'>{{overall_count[selectedReview]["ACKNOWLEDGE_REVIEW"]}}</span>
+                      <span tooltip='{{overall_count[selectedReview]["PUBLISH_REVIEW"]}} completed' class='label label-success'>{{overall_count[selectedReview]["PUBLISH_REVIEW"]}}</span>
+                      <span tooltip='{{overall_count[selectedReview]["READY2PUBLISH"]}} ready to publish' class='label label-almost-success'>{{overall_count[selectedReview]["READY2PUBLISH"]}}</span>
+                      <span tooltip='{{overall_count[selectedReview]["COMMIT_REVIEW"] + overall_count[selectedReview]["ADD_FEEDBACK"]}} committed' class='label label-primary'>{{overall_count[selectedReview]["COMMIT_REVIEW"] + overall_count[selectedReview]["ADD_FEEDBACK"]}}</span>
+                      <span tooltip='{{overall_count[selectedReview]["REVIEW_DRAFT"] + overall_count[selectedReview]["SAVE_DRAFT"]}} in progress' class='label label-warning'>{{overall_count[selectedReview]["REVIEW_DRAFT"] + overall_count[selectedReview]["SAVE_DRAFT"]}}</span>
+                      <span tooltip='{{overall_count[selectedReview]["SETUP_DONE"]}} assigned' class='label label-danger'>{{overall_count
+                      [selectedReview]["SETUP_DONE"]}}</span>
+                      <span tooltip='{{overall_count[selectedReview]["UNASSIGNED"]}} unassigned' class='label label-default'>{{overall_count[selectedReview]["UNASSIGNED"]}}</span>
+                  </span>
+                </div>
+
+                <div class="col-xs-2 big_percentage">{{(percentage[selectedReview]["ACKNOWLEDGE_REVIEW"] + percentage[selectedReview]["PUBLISH_REVIEW"]).toFixed()}}<sup>%</sup></div>
+              </div>
+
+              <div ng-if="review.type == 'self-review'">
+                <div class='clearfix count'>
+                  <span class='overall_count pull-right'>
+                      <span tooltip='{{overall_count[selectedReview]["COMMIT_REVIEW"]}} committed' class='label label-primary'>{{overall_count[selectedReview]["COMMIT_REVIEW"]}}</span>
+                      <span tooltip='{{overall_count[selectedReview]["REVIEW_DRAFT"]}} in progress' class='label label-warning'>{{overall_count[selectedReview]["REVIEW_DRAFT"]}}</span>
+                      <span tooltip='{{overall_count[selectedReview]["SETUP_DONE"]}} assigned' class='label label-danger'>{{overall_count[selectedReview]["SETUP_DONE"]}}</span>
+                      <span tooltip='{{overall_count[selectedReview]["UNASSIGNED"]}} unassigned' class='label label-default'>{{overall_count[selectedReview]["UNASSIGNED"]}}</span>
+                  </span>
+                </div>
+
+                <div class="col-xs-2 big_percentage">{{percentage[selectedReview]["COMMIT_REVIEW"].toFixed()}}<sup>%</sup></div>
+              </div>
+
+              <div class='progress col-xs-10'>
+                <div style='width: {{percentage[selectedReview]["ACKNOWLEDGE_REVIEW"]}}%' tooltip='{{overall_count[selectedReview]["ACKNOWLEDGE_REVIEW"]}} acknowledged' tooltip-append-to-body="true" class='progress-bar progress-bar-info cursor-pointer' role='progressbar' aria-valuenow='60' aria-valuemin='0' aria-valuemax='100' ng-click="displayDetailedOverallStats('ACKNOWLEDGE_REVIEW')"></div>
+                <div style='width: {{percentage[selectedReview]["PUBLISH_REVIEW"]}}%' tooltip='{{overall_count[selectedReview]["PUBLISH_REVIEW"]}} completed' tooltip-append-to-body="true" class='progress-bar progress-bar-success cursor-pointer' role='progressbar' aria-valuenow='60' aria-valuemin='0' aria-valuemax='100' ng-click="displayDetailedOverallStats('PUBLISH_REVIEW')"></div>
+                <div style='width: {{percentage[selectedReview]["READY2PUBLISH"]}}%' tooltip='{{overall_count[selectedReview]["READY2PUBLISH"]}} ready to publish' tooltip-append-to-body="true" class='progress-bar progress-bar-almost-success cursor-pointer' role='progressbar' aria-valuenow='60' aria-valuemin='0' aria-valuemax='100' ng-click="displayDetailedOverallStats('READY2PUBLISH')"></div>
+                <div style='width: {{percentage[selectedReview]["COMMIT_REVIEW"]}}%' tooltip='{{overall_count[selectedReview]["COMMIT_REVIEW"]}} committed' tooltip-append-to-body="true" class='progress-bar progress-bar-primary cursor-pointer' role='progressbar' aria-valuenow='60' aria-valuemin='0' aria-valuemax='100' ng-click="displayDetailedOverallStats('COMMIT_REVIEW')"></div>
+                <div style='width: {{percentage[selectedReview]["REVIEW_DRAFT"]}}%' tooltip='{{overall_count[selectedReview]["REVIEW_DRAFT"]}} in progress' tooltip-append-to-body="true" class='progress-bar progress-bar-warning cursor-pointer' role='progressbar' aria-valuenow='60' aria-valuemin='0' aria-valuemax='100' ng-click="displayDetailedOverallStats('REVIEW_DRAFT')"></div>
+                <div style='width: {{percentage[selectedReview]["SETUP_DONE"]}}%' tooltip='{{overall_count[selectedReview]["SETUP_DONE"]}} assigned' tooltip-append-to-body="true" class='progress-bar progress-bar-danger cursor-pointer' role='progressbar' aria-valuenow='60' aria-valuemin='0' aria-valuemax='100' ng-click="displayDetailedOverallStats('SETUP_DONE')"></div>
+                <div style='width: {{percentage[selectedReview]["UNASSIGNED"]}}%' tooltip='{{overall_count[selectedReview]["UNASSIGNED"]}} unassigned' tooltip-append-to-body="true" class='progress-bar progress-bar-default cursor-pointer' role='progressbar' aria-valuenow='60' aria-valuemin='0' aria-valuemax='100' ng-click="displayDetailedOverallStats('UNASSIGNED')"></div>
+              </div>
+
+              <div class='card-contents review-statistics'>
+                <div ng-if=data.review_types.length class='stats-deptwise col-xs-12'>
+                  <div class="col-xs-6 dept-progressbars" ng-repeat='dept in depts | orderBy:""'>
+                      <div class="col-xs-5"><span class="dept-name">{{dept}}<span class="total-count"> ({{allUsersByDept[dept].length}})</span></span></div>
+                      <div class='progress dept-progress'>
+                        <div ng-click='displayDetailedStats(review_type, dept,"ACKNOWLEDGE_REVIEW")' tooltip='{{dept_count[dept]["ACKNOWLEDGE_REVIEW"]}} acknowledged' style='width: {{dept_percent[dept]["ACKNOWLEDGE_REVIEW"]}}%' class='progress-bar progress-bar-info' role='progressbar' aria-valuenow='60' aria-valuemin='0' aria-valuemax='100'><span class="message" ng-if='dept_percent[dept]["ACKNOWLEDGE_REVIEW"] + dept_percent[dept]["UNASSIGNED"] == 100'>COMPLETE</span></div>
+                      <div ng-click='displayDetailedStats(review_type, dept,"PUBLISH_REVIEW")' tooltip='{{dept_count[dept]["PUBLISH_REVIEW"]}} published' style='width: {{dept_percent[dept]["PUBLISH_REVIEW"]}}%' class='progress-bar progress-bar-success' role='progressbar' aria-valuenow='60' aria-valuemin='0' aria-valuemax='100'><span class="message" ng-if='dept_percent[dept]["PUBLISH_REVIEW"] == 100'></span></div>
+                      <div  ng-click='displayDetailedStats(review_type, dept,"READY2PUBLISH")' tooltip='{{dept_count[dept]["READY2PUBLISH"]}} ready to publish' style='width: {{dept_percent[dept]["READY2PUBLISH"]}}%' class='progress-bar progress-bar-almost-success' role='progressbar' aria-valuenow='60' aria-valuemin='0' aria-valuemax='100'></div>
+                      <div  ng-click='displayDetailedStats(review_type, dept,"COMMIT_REVIEW")' tooltip='{{dept_count[dept]["COMMIT_REVIEW"]}} committed' style='width: {{dept_percent[dept]["COMMIT_REVIEW"]}}%' class='progress-bar progress-bar-primary' role='progressbar' aria-valuenow='60' aria-valuemin='0' aria-valuemax='100'></div>
+                      <div  ng-click='displayDetailedStats(review_type, dept,"REVIEW_DRAFT")' tooltip='{{dept_count[dept]["REVIEW_DRAFT"]}} in progress' style='width: {{dept_percent[dept]["REVIEW_DRAFT"]}}%' class='progress-bar progress-bar-warning' role='progressbar' aria-valuenow='60' aria-valuemin='0' aria-valuemax='100'></div>
+                      <div  ng-click='displayDetailedStats(review_type, dept,"SETUP_DONE")' tooltip='{{dept_count[dept]["SETUP_DONE"]}} not yet started' style='width: {{dept_percent[dept]["SETUP_DONE"]}}%' class='progress-bar progress-bar-danger' role='progressbar' aria-valuenow='60' aria-valuemin='0' aria-valuemax='100'></div>
+                      <div  ng-click='displayDetailedStats(review_type, dept,"UNASSIGNED")' tooltip="{{dept_count[dept]['UNASSIGNED']}} unassigned" style="width: {{dept_percent[dept]['UNASSIGNED']}}%" class="progress-bar progress-bar-default"role='progressbar'></div>
+                    </div>
+                  </div>
+                  <div class="col-xs-1"></div>
+              <div class="col-xs-10" ng-if="review.type == 'review'">
+            <p class="h3 backlog-header" ng-if="backlog.length >0"> <span class="glyphicon glyphicon-fire backlog-glyph"></span>Most Backlog</p>
+            <p class="col-xs-4 cursor-pointer" ng-click="displayDetailedBacklogStats(_selected_review_type.year,_selected_review_type.rname,user2dept[bl.id][0].uid)" ng-repeat='bl in backlog | orderBy: count'><span class='label label-warning'>{{bl.count}}</span><span class="cursor-pointer backlog">{{user2dept[bl.id][0].cn}}</span></p>
+                  </div>
+                  <div class="col-xs-1"></div>
+                <div class="col-xs-1"></div>
+        </div>
+        </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

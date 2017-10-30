@@ -1,0 +1,620 @@
+.adminMgmt .well {
+  box-shadow: -2px 2px 2px #ccc;
+  cursor: pointer;
+  border: none;
+  height: 230px;
+  margin-bottom: 50px;
+}
+.adminMgmt .sections {
+  cursor: pointer;
+  margin: 20px 10px 0 10px;
+  font-size: 20px;
+  background: #ddd;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+.adminMgmt .sections .active {
+  color: #009688;
+}
+.adminMgmt .adminList {
+  margin: 20px;
+}
+.adminMgmt .adminList .glyphicon {
+  top: -55px;
+  cursor: pointer;
+  left: 15px;
+}
+.adminMgmt .adminList .well {
+  box-shadow: -2px 2px 2px #bbb;
+  margin-left: 10px;
+  margin-right: 10px;
+  height: 300px;
+}
+.adminMgmt .roles {
+  background: #ddd;
+  padding: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 2px;
+  border-radius: 15px;
+}
+.adminMgmt .strikeRole {
+  text-decoration: line-through;
+}
+.adminMgmt input[type="text"] {
+  width: 400px;
+  margin: 30px;
+}
+.adminMgmt .addIcon {
+  cursor: pointer;
+  color: #fff;
+  border-radius: 50%;
+  padding: 10px;
+  background: #009688;
+  box-shadow: -2px 2px 2px #888;
+  font-size: 18px;
+  top: -20px;
+  position: absolute;
+  left: 234px;
+}
+.pagination span,
+.pagination li {
+  cursor: pointer;
+}
+.setup-col h3 {
+  border-bottom: 1px solid #c8c8c8;
+  padding: 10px 0px;
+  margin-bottom: 0px;
+  color: #585858;
+}
+.setup-col {
+  height: 1000px;
+}
+.setup-col div h3 {
+  background-color: #f1f1f1;
+  box-shadow: 0 0 0 1px #d1d1d1,0 0 4px 1px #ccc;
+}
+.setup-col .contents {
+  padding: 8px 10px 10px 10px;
+}
+.setup-col .contents .create_review_type {
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+}
+.setup-col .contents .create_review_type .create_icon {
+  cursor: pointer;
+}
+.setup-col .contents .create_review_type .create_icon span {
+  float: right;
+  font-size: 16px;
+  margin-left: 15px;
+  padding-top: 3px;
+  opacity: 0.8;
+}
+.setup-col .contents .create_review_type .create_icon span:hover {
+  opacity: 1;
+}
+.setup-col .contents .review-create-form {
+  background-color: #dfdfdf;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.setup-col .contents .review-create-form .create-btn {
+  background-color: #009688;
+  color: white;
+  height: 24px;
+  margin-top: -3px;
+}
+.setup-col .contents .review-create-form input {
+  padding: 0px 0px 0px 5px;
+  margin-top: 0px;
+  height: 24px;
+}
+.setup-col .contents .review-create-form input.year-input {
+  width: 20%;
+}
+.setup-col .contents .review-create-form input.rname-input {
+  width: 60%;
+}
+.setup-col .contents .review_type_wrapper {
+  padding: 10px;
+  cursor: pointer;
+}
+.setup-col .contents .review_type_wrapper .year {
+  margin: 0px 2px;
+  width: 45px;
+}
+.setup-col .contents .review_type_wrapper .desc {
+  font-size: 14px;
+}
+.setup-col .contents .review_type_wrapper .desc span {
+  font-style: italic;
+  color: #969696;
+}
+.setup-col .contents .review_type_wrapper .rname {
+  font-size: 10px;
+  float: right;
+}
+.setup-col .contents .review_type_wrapper .setup {
+  float: right;
+  font-size: 16px;
+  opacity: 0;
+  top: 3px;
+  cursor: pointer;
+}
+.setup-col .contents .review_type_wrapper:hover {
+  background-color: #f3f3f3;
+}
+.setup-col .contents .review_type_wrapper:hover .setup {
+  opacity: 1;
+}
+.setup-col-card {
+  box-shadow: 0 0 0 1px #d1d1d1,0 0 4px 1px #ccc;
+  background-color: white;
+  min-height: 100%;
+  position: relative;
+  margin-top: -53px;
+  overflow: auto;
+  padding-bottom: 53px;
+  height: 90%;
+  border-bottom: 20px solid #fff;
+  text-align: center;
+}
+.setup-col-card .card-contents {
+  padding: 15px;
+}
+.review-statistics .badge.year {
+  font-size: 20px;
+  margin-right: 10px;
+  vertical-align: middle;
+  margin-top: -7px;
+}
+.review-statistics .switch-stats {
+  display: inline-block;
+  font-size: 12px;
+  margin: 8px 8px 0px 8px;
+}
+.review-statistics .switch-stats span {
+  cursor: pointer;
+}
+.review-statistics .switch-stats span.active {
+  color: #009688;
+}
+.review-statistics .switch-stats span.review {
+  margin-right: 5px;
+}
+.review-statistics .switch-stats span input {
+  cursor: pointer;
+  margin-right: 3px;
+  position: relative;
+  top: 2px;
+}
+.review-statistics .switch-stats span:hover {
+  color: #009688;
+}
+.review-statistics .stats-button {
+  margin-top: 4px;
+}
+.review-statistics .count {
+  margin-bottom: 10px;
+}
+.review-statistics .overall_count {
+  margin-top: 7px;
+}
+.review-statistics .overall_count .label {
+  color: #333;
+  cursor: default;
+}
+.review-statistics .overall_count .label.label-default {
+  background-color: #CFD8DC;
+}
+.review-statistics .overall_count .label.label-danger {
+  background-color: #ffc107;
+}
+.review-statistics .overall_count .label.label-warning {
+  background-color: #cddc39;
+}
+.review-statistics .overall_count .label.label-primary {
+  background-color: #8bc34a;
+}
+.review-statistics .overall_count .label.label-almost-success {
+  background-color: #7CB342;
+}
+.review-statistics .overall_count .label.label-success {
+  background-color: #259b24;
+  color: white;
+}
+.review-statistics .overall_count .label.label-info {
+  background-color: #00796B;
+  color: white;
+}
+.review-statistics .big_percentage {
+  font-size: 54px;
+  text-align: center;
+  color: #00796B;
+  margin-top: -30px;
+}
+.review-statistics .big_percentage sup {
+  font-size: 30px;
+}
+.review-statistics .progress {
+  padding: 0px 0px;
+}
+.review-statistics .progress .progress-bar {
+  box-shadow: none;
+}
+.review-statistics .progress .progress-bar-default {
+  background-color: #CFD8DC;
+}
+.review-statistics .progress .progress-bar-success {
+  background-color: #259b24;
+}
+.review-statistics .progress .progress-bar-almost-success {
+  background-color: #7CB342;
+}
+.review-statistics .progress .progress-bar-info {
+  background-color: #00796B;
+}
+.review-statistics .progress .progress-bar-primary {
+  background-color: #8bc34a;
+}
+.review-statistics .progress .progress-bar-warning {
+  background-color: #cddc39;
+}
+.review-statistics .progress .progress-bar-danger {
+  background-color: #ffc107;
+}
+.review-statistics .stats-deptwise {
+  float: left;
+  margin-right: 1%;
+  margin-top: 2%;
+  padding-top: 3%;
+  height: 930px;
+}
+.review-statistics .stats-deptwise .dept-progressbars {
+  text-align: right;
+}
+.review-statistics .stats-deptwise .dept-progressbars .dept-progress {
+  cursor: pointer;
+  height: 18px;
+}
+.review-statistics .stats-deptwise .dept-progressbars .dept-progress .message {
+  pointer-events: none;
+}
+.review-statistics .stats-deptwise .badge.year {
+  font-size: 20px;
+  margin-right: 10px;
+  vertical-align: middle;
+  margin-top: -10px;
+}
+.review-statistics .stats-deptwise .total-count {
+  font-size: 12px;
+}
+.review-statistics .stats-mid {
+  float: left;
+  width: 32%;
+  margin-right: 1%;
+}
+.bulkedit-contents {
+  margin-top: 70px;
+}
+.bulkedit-contents .panel {
+  padding: 10px;
+  box-shadow: 0 0 0 1px #d1d1d1,0 0 4px 1px #ccc;
+  background-color: white;
+}
+.bulkedit-contents .panel .heading {
+  font-size: 20px;
+  display: inline-block;
+  margin-right: 10px;
+}
+.bulkedit-contents .panel input.desc {
+  display: inline;
+  width: 300px;
+  height: 34px;
+  margin-top: 0px;
+  border-width: 0px;
+  font-weight: bold;
+  font-size: 24px;
+}
+.bulkedit-contents .panel input.desc:hover {
+  background-color: #eeeeee;
+}
+.bulkedit-contents .panel input.desc:focus {
+  border-width: 1px;
+  background-color: white;
+}
+.bulkedit-contents .panel span.status {
+  color: #969696;
+}
+.bulkedit-contents .panel .result-filter input {
+  display: inline;
+  width: 200px;
+  float: right;
+  height: 26px;
+  margin-top: 6px;
+}
+.bulkedit-contents .panel .result-filter span {
+  left: -21px;
+  top: 12px;
+  margin-right: 0px;
+}
+.bulkedit-contents .clear-filter {
+  color: gray;
+  cursor: pointer;
+}
+.bulkedit-contents .clear-filter:hover {
+  color: #333;
+}
+table.bulkedit thead th,
+table.bulkedit tbody tr {
+  text-align: center !important;
+}
+table.bulkedit {
+  box-shadow: 0 0 0 1px #d1d1d1,0 0 4px 1px #ccc;
+  background-color: white;
+}
+table.bulkedit thead th {
+  cursor: pointer;
+}
+table.bulkedit thead tr {
+  height: 41px;
+  background-color: #E0F2F1;
+}
+table.bulkedit tbody tr:nth-child(odd) {
+  background-color: #eeeeee;
+}
+table.bulkedit tbody tr:nth-child(odd):hover {
+  background-color: #e9e9e9;
+}
+table.bulkedit tbody tr:nth-child(even):hover {
+  background-color: #fafafa;
+}
+table.bulkedit tbody tr.read-only {
+  background-color: #E0F2F1;
+  cursor: not-allowed;
+}
+table.bulkedit tbody tr.read-only:hover {
+  background-color: #E0F2F1;
+}
+table.bulkedit tbody tr.read-only .reviewers-list {
+  cursor: not-allowed;
+}
+table.bulkedit tbody tr .status {
+  color: #26A69A;
+}
+table.bulkedit tbody th {
+  /*
+            span.glyphicon {
+                height: 0px;
+                float: right;
+                top: 7px;
+                right: 10px;
+            }
+            */
+}
+table.bulkedit tbody th.dept {
+  width: 20%;
+}
+table.bulkedit tbody th.name {
+  width: 30%;
+}
+table.bulkedit tbody th.user {
+  width: 10%;
+}
+table.bulkedit tbody th.template {
+  width: 10%;
+}
+table.bulkedit tbody th.reviewers {
+  width: 30%;
+}
+table.bulkedit td {
+  cursor: default;
+  /*
+        span.glyphicon {
+            float: right;
+            margin-top: 10px;
+            opacity: 0;
+            color: blue;
+        }
+
+        */
+}
+table.bulkedit td[contenteditable]:hover {
+  background-color: #FFEFBB;
+  cursor: normal;
+  outline: 1px solid #a5bfff;
+}
+table.bulkedit td[contenteditable]:hover span {
+  opacity: 1;
+}
+table.bulkedit th span.glyphicon {
+  margin-top: 3px;
+  margin-left: 10px;
+}
+table.bulkedit span.glyphicon {
+  font-size: 10px;
+}
+table.bulkedit .th-active {
+  color: #009688;
+}
+table.bulkedit td[contenteditable]:focus {
+  background-color: #FFEFBB;
+  outline: 2px solid #a5bfff;
+}
+table.bulkedit input.permissions {
+  margin-top: 0px;
+  border: none;
+  padding: 0px 0px 1px 0px;
+}
+.form-control {
+  border-radius: 0px;
+  height: 23px;
+  padding: 0px 3px;
+}
+.read-only {
+  background-color: #eeeeee;
+}
+select.global_template_id_prompt {
+  min-width: 157px;
+}
+.global_template_id_prompt {
+  padding-top: 12px !important;
+}
+.global_template_id_prompt_yes,
+.global_template_id_prompt_no {
+  margin-left: 10px;
+  cursor: pointer;
+}
+.global_template_id_prompt_yes:hover,
+.global_template_id_prompt_no:hover {
+  text-decoration: underline;
+}
+.global_template_id_prompt_yes {
+  color: #00897b;
+}
+.global_template_id_prompt_no {
+  color: #d81b60;
+}
+.icon-search {
+  color: #333;
+  top: 34px;
+  float: right;
+  margin-right: 10px;
+}
+.back-to-setup {
+  font-size: 28px;
+  top: 5px;
+  color: #AAAAAA;
+  cursor: pointer;
+}
+.back-to-setup.templates {
+  top: 1px;
+  left: -3px;
+}
+.back-to-setup:hover {
+  color: #333333;
+}
+.setup-more .archive-review .glyphicon {
+  margin-right: 5px;
+}
+.reviewers-div {
+  display: block;
+  opacity: 1;
+  background-color: white;
+  color: black;
+  text-align: start;
+}
+.reviewer-tag-list:active {
+  outline: none;
+}
+.reviewer-tag-list:focus {
+  outline: none;
+}
+.reviewer-tag-list {
+  display: inline-block;
+}
+.reviewer-tag-list .reviewer-tag {
+  background-color: #E0F2F1;
+  border-radius: 0 0 0 0;
+  color: #009688;
+  display: inline-block;
+  outline: none;
+  font-size: 12px;
+  margin: 2px 2px 2px 0;
+  padding: 2px 0.5em;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: default;
+  border: 1px solid rgba(0, 0, 0, 0);
+}
+.reviewer-tag-list .reviewer-tag:hover {
+  border: 1px solid #B2DFDB;
+}
+.reviewers-list {
+  background-color: #FFFFFF;
+  border: 1px solid #CCCCCC;
+  cursor: text;
+  position: relative;
+  padding: 0px 2px;
+}
+.reviewers-list .input-reviewer-add {
+  border: 0 none;
+  width: 100px;
+}
+.read-only {
+  background-color: #f5f5f5;
+}
+.reviewers-td {
+  max-width: 600px;
+  width: 600px;
+}
+.remove-reviewer {
+  cursor: pointer;
+  margin: 0px 0px 0px 8px;
+}
+.remove-reviewer:hover {
+  color: #00695C;
+}
+.selected-review-true {
+  background-color: #E0F2F1;
+}
+.selected-tag {
+  outline: none;
+  border: 1px solid #FFA000 !important;
+}
+.backlog-header {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.backlog-glyph {
+  margin-right: 10px;
+}
+.archive_checkbox {
+  font-size: 12px;
+}
+.archive_checkbox input {
+  margin-right: 5px;
+  margin-top: 2px;
+  top: 2px;
+  position: relative;
+  cursor: pointer;
+}
+.btn-setup,
+.btn-templates {
+  background: #7E57C2;
+  color: #ffffff;
+  margin-right: 2px;
+  font-size: 12px;
+  padding: 5px 10px;
+}
+.btn-setup:hover,
+.btn-templates:hover {
+  color: #ffffff;
+  background: #673AB7;
+}
+.btn-setup:active,
+.btn-templates:active {
+  color: #ffffff;
+  background: #673AB7;
+}
+.btn-setup:focus,
+.btn-templates:focus {
+  color: #ffffff;
+  background: #673AB7;
+}
+.btn-setup .glyphicon,
+.btn-templates .glyphicon {
+  margin-right: 5px;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+.cursor-pointer .backlog {
+  position: relative;
+  top: 2px;
+  left: 6px;
+}
+.cursor-pointer:hover {
+  color: #009688;
+}

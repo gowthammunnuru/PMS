@@ -1,0 +1,63 @@
+<h2>
+    {{prompt}}
+
+    <i class="markdown-help-icon" data-toggle="modal" data-target="#markdown-help-modal">
+        <span class="glyphicon glyphicon-question-sign" title="help on formatting"></span>
+    </i>
+</h2>
+
+<textarea class="comments self-review"
+          ng-if="overlay.show && review_type == 'review'"
+          ng-readonly=true
+          ng-model-options="{'debounce': 1000}"
+          ng-model="selfReview.review_body[modelkey(prompt, 'notes')]">
+</textarea>
+
+<textarea class="comments"
+          ng-readonly="review_type == 'weights-performance' || review_type == 'weights-potential' || review_packet.locked || review_packet.committed|| notEditable"
+          ng-class="{'highlight': shouldHighlight(modelkey(prompt, 'notes'))}"
+          ng-model-options="{'debounce': 1000}"
+          ng-model="review[modelkey(prompt, 'notes')]"
+          placeholder="{{prompt}}">
+</textarea>
+
+<div class="modal fade" id="markdown-help-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog help-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h2 class="modal-title">Help on formatting</h2>
+            </div>
+            <div class="modal-body">
+                <div>
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" ng-class="{'active': $first}" ng-repeat="help in markdownHelp">
+                        <a data-target="#{{help.id}}" aria-controls={{help.title}} role="tab" data-toggle="tab">{{help.title}}</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in" ng-class="{'active': $first}" id={{help.id}} ng-repeat="help in markdownHelp">
+                        <table class="table table-condensed">
+                            <tbody>
+                                <tr>
+                                    <th class="help-table-header">Markup</th>
+                                    <th></th>
+                                    <th class="help-table-header">Output</th>
+                                </tr>
+                                <tr>
+                                    <td class="markup"><pre>{{ help.content }}</pre></td>
+                                    <td class="equals"> => </td>
+                                    <td ng-bind-html="help.content | MarkdownFilter"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

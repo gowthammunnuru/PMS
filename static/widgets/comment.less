@@ -1,0 +1,103 @@
+textarea.comments {
+  height: 200px;
+  width: 100%;
+  border-color: rgb(200, 200, 200);
+  padding: 7px;
+
+  &.self-review {
+    background-color: rgb(220, 220, 220);
+  }
+
+  &.highlight {
+    border: 2px solid rgb(255, 142, 142);
+  }
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+.preview-comment-table {
+  margin: 20px 0;
+
+  thead {
+    background-color: rgb(214, 214, 214);
+    display: table-row-group;
+
+    th {
+      vertical-align: middle !important;
+      padding: 0 5px !important;
+    }
+  }
+}
+
+textarea.preview-comments {
+  height: auto;
+  width: 100%;
+  border: none;
+}
+
+comment {
+  display: block;
+  div {
+    word-break: keep-all;
+  }
+}
+
+.multi-comments {
+  width: 300px;
+  height: 200px;
+  border-color: gray;
+  padding: 5px;
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+.multi-comments-readonly {
+  width: 300px;
+  height: 200px;
+  padding: 6px;
+  overflow: auto;
+  border: 1px solid gray;
+  ul {
+    li {
+      list-style: disc inside;
+    }
+  }
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+.multi-header {
+  margin-top: 50px;
+  margin-bottom: 200px;
+}
+
+.help-dialog {
+  width: 40%;
+
+  .nav-tabs {
+    cursor: pointer;
+  }
+
+  .tab-content {
+    .equals {
+      font-size: 26px;
+      font-weight: 500;
+      vertical-align: middle;
+    }
+
+    .markup {
+      vertical-align: middle;
+    }
+  }
+
+  pre {
+    background-color: white;
+    border: 0;
+  }
+}

@@ -1,0 +1,106 @@
+<html>
+    <head>
+        <title>{{ escape(reviewuser_name) }}</title>
+        <!-- Handcrafted styles -->
+        <link rel="stylesheet" href="http://{{host}}:{{port}}/static/external/bootstrap/css/bootstrap.css" media="all">
+        <link rel="stylesheet" href="http://{{host}}:{{port}}/static/css/print.css" type="text/css" media="print">
+        <link rel="stylesheet" href="http://{{host}}:{{port}}/static/css/app.css" type="text/css" media="all">
+        <link rel="stylesheet" href="http://{{host}}:{{port}}/static/css/user.css" type="text/css" media="all">
+        <link rel="stylesheet" href="http://{{host}}:{{port}}/static/css/user.preview.css" type="text/css" media="all">
+        <link rel="stylesheet" href="http://{{host}}:{{port}}/static/css/landing.css" type="text/css" media="all">
+        <link rel="stylesheet" href="http://{{host}}:{{port}}/static/css/home.css" type="text/css" media="all">
+        <link rel="stylesheet" href="http://{{host}}:{{port}}/static/css/feedback.form.css" type="text/css" media="all">
+        <link rel="stylesheet" href="http://{{host}}:{{port}}/static/css/dialog.css" type="text/css" media="all">
+        <link rel="stylesheet" href="http://{{host}}:{{port}}/static/css/dialog.multireview.css" type="text/css" media="all">
+        <link rel="stylesheet" href="http://{{host}}:{{port}}/static/css/dialog.leavefeedback.css" type="text/css" media="all">
+        <link rel="stylesheet" href="http://{{host}}:{{port}}/static/css/dialog.detailedstats.css" type="text/css" media="all">
+        <link rel="stylesheet" href="http://{{host}}:{{port}}/static/css/dialog.acknowledgereview.css" type="text/css" media="all">
+        <link rel="stylesheet" href="http://{{host}}:{{port}}/static/css/admin.css" type="text/css" media="all">
+        <link rel="stylesheet" href="http://{{host}}:{{port}}/static/css/autherror.css" type="text/css" media="all">
+        <link rel="stylesheet" href="http://{{host}}:{{port}}/static/css/bootstrap.css" type="text/css" media="all">
+        <link rel="stylesheet" href='http://{{host}}:{{port}}/static/widgets/prompt.css' type="text/css" media="all">
+        <link rel="stylesheet" href='http://{{host}}:{{port}}/static/widgets/pagebreak.css' type="text/css" media="all">
+        <link rel="stylesheet" href='http://{{host}}:{{port}}/static/widgets/review.css' type="text/css" media="all">
+        <link rel="stylesheet" href='http://{{host}}:{{port}}/static/widgets/comment.css' type="text/css" media="all">
+        <link rel="stylesheet" href='http://{{host}}:{{port}}/static/widgets/page.css' type="text/css" media="all">
+    </head>
+    <page>
+        <div class='container-fluid'>
+            <div class='row'>
+                <div class='preview_wrapper col-xs-10 col-xs-offset-1'>
+                    <div class='review_content col-xs-12'>
+                        <div class='preview-page'>
+                            {% include "user.pdf.header.html" %}
+                            {% for block in ratings %}
+                                <prompt blocktitle="{{ block['blocktitle'] }}" mode="preview">
+                                    <table class='table preview-prompt-table'>
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <h4>{{block['blocktitle']}}</h4>
+                                                </th>
+                                                <th>Rating</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for criterion in block['criteria'] %}
+                                                <tr>
+                                                    <td class='preview-criterion'>
+                                                        {{ criterion['name'] }}
+                                                    </td>
+                                                    <td class='preview-rating' style="width: 200px">
+                                                        {{ ratings_title[criterion['rating']] }}
+                                                    </td>
+                                                </tr>
+                                            {% end %}
+                                        </tbody>
+                                    </table>
+                                </prompt>
+                            {% end %}
+                        </div>
+                        <div class='page-footer-1'>
+                            {% include "user.pdf.footer.html" %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </page>
+    <div class='pagebreak' style="page-break-before: always;"></div>
+    <page>
+        <div class='container-fluid'>
+            <div class='row'>
+                <div class='preview_wrapper col-xs-10 col-xs-offset-1'>
+                    <div class='review_content col-xs-12'>
+                        <div class='preview-page'>
+                            {% include "user.pdf.header.html" %}
+                            {% for note in notes %}
+                                <comment mode="preview">
+                                    <table class='table preview-comment-table'>
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <h4>{{note['notetitle']}}</h4>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div>{% raw note['text'] %}</div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </comment>
+                            {% end %}
+                        </div>
+                        <div class='page-footer-2'>
+                            {% include "user.pdf.footer.html" %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </page>
+</html>

@@ -1,0 +1,62 @@
+<head>
+  <title>{{template_id}} - {{review_year}}/{{review_name}} - perform</title>
+</head>
+
+
+<div class="container-fluid">
+
+
+  <div class="contents template-preview row">
+
+
+
+
+    <div class="col-xs-12">
+
+      <div class="row">
+
+
+        <div class="col-xs-10 col-xs-offset-1 review_header_wrapper">
+          <div class="left">
+            <span class="item go-back" ng-click="BG.go('admin.templates.start')" tooltip="Go back" tooltip-append-to-body=true ><span class="glyphicon glyphicon-chevron-left"></span></span>
+            <span tooltip="Lead Template" ng-if="review_payload.latest_template.is_lead" tooltip-append-to-body=true class="item is-lead"><span class="glyphicon glyphicon-bookmark"></span></span>
+            <span class="item name">{{template_id}}</span>
+            <span ng-if="!restrictedAccess && !review_packet.locked && !review_packet.committed" class="item save-status" title="Automatically saved every {{save.freq}} seconds. {{save.last_str}}">{{save.status}}</span>
+          </div>
+        </div>
+
+        <div class="col-xs-10 col-xs-offset-1 review_tabs_wrapper">
+          <div class="tabs">
+            <center>
+              <span ng-repeat="section in sections | orderBy:'order'" class="switch-tabs" ng-click="switchSection(section)" ng-class="{'active': sectionName == section.name}">{{section.blocktitle}}</span>
+
+            </center>
+            <center class="right-side-buttons">
+              <!--
+              <span class="checkbox enable-weights" ng-click="editWeights = !editWeights">Edit weights <input ng-click="$event.stopPropagation()" ng-model=editWeights type="checkbox"> </span>
+              <button ng-disabled="!editWeights" type="button" ng-click="BG.go($state.current.name, {review_type: 'weights-performance'}, {reload: true})" ng-class="{'not-selected': review_type != 'weights-performance'}"class="btn btn-ok btn-switch-reviewtypes">Performance</button>
+              <button ng-disabled="!editWeights" type="button" ng-click="BG.go($state.current.name, {review_type: 'weights-potential'}, {reload: true})" ng-class="{'not-selected': review_type != 'weights-potential'}"class="btn btn-ok btn-switch-reviewtypes">Potential</button>
+              -->
+              <button type="button" ng-click="BG.go($state.current.name, {review_type: 'weights-performance'}, {reload: true})" ng-class="{'not-selected': review_type != 'weights-performance'}"class="btn btn-ok btn-switch-reviewtypes">Performance</button>
+              <button type="button" ng-click="BG.go($state.current.name, {review_type: 'weights-potential'}, {reload: true})" ng-class="{'not-selected': review_type != 'weights-potential'}"class="btn btn-ok btn-switch-reviewtypes">Potential</button>
+            </center>
+
+          </div>
+        </div>
+
+
+        <div class="col-xs-10 col-xs-offset-1 review_wrapper">
+          <div class="row">
+            <div class="col-xs-12" ui-view="contents"></div>
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+</div>

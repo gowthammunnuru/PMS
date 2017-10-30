@@ -1,0 +1,14 @@
+<table class="table preview-comment-table">
+  <thead>
+    <tr>
+      <th><h4>{{prompt}}</h4></th>
+    <tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <div ng-bind-html="review[modelkey(prompt, 'notes')] | MarkdownFilter"></div>
+      </td>
+    </tr>
+  </tbody>
+</table>

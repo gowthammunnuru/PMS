@@ -1,0 +1,38 @@
+<div class="row">
+
+  <div class="col-xs-12">
+
+    <table class="table ninebox">
+      <tbody>
+        <tr ng-repeat="row in [0, 1, 2]" class="ninebox-row">
+          <td ng-repeat="col in [0, 1, 2]" style="height: {{cellheight}}; background-xcolor: {{colors[metadata[row*3 + col].rank][0];}}" class="ninebox-cell ninebox-cell-{{metadata[row*3 + col].index_str}}">
+
+            <span class="cell-label">{{metadata[row*3 + col].title}}</span>
+
+            <ul style="height: {{cellheight}};">
+              <li class="item" style="background-xcolor: {{colors[metadata[row*3 + col].rank][4];}}" ng-repeat="user in matrix[row][col]">
+
+              <span class="left">
+                <img class="pic" src="/avatar/{{user.uid}}">
+                <!-- <img class="pic" src="http://dwskg.anim.dreamworks.com/dreampages/animation/images/{{user.employeeNumber}}.jpg"> -->
+                <span ng-click="BG.go('user_review_year.start', {'uid': user.uid, 'review_year': user.review.year, 'review_name': user.review.rname})" class="name">{{user.cn}}</span>
+              </span>
+
+                <span class="percent">
+                  <div tooltip-append-to-body=true class="performance" tooltip="Performance {{user.ninebox.percent_str[0]}}%">⚡  {{user.ninebox.percent_str[0]}}</div>
+                  <div tooltip-append-to-body=true class="potential"   tooltip="Potential {{user.ninebox.percent_str[1]}}%">☘  {{user.ninebox.percent_str[1]}}</div>
+                </span>
+
+                <!--<span class="name">{{user.cn}}</span> -->
+              </li>
+
+            </ul>
+
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+
+    </div>
+</div>

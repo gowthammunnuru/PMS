@@ -1,0 +1,108 @@
+<head>
+  <title>Multi Review ({{users.length}}) - perform</title>
+</head>
+
+<div>
+
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="review_header_wrapper col-xs-10 col-xs-offset-1">
+        <div class="left">
+          <span class="item name">{{headerString}}</span>
+          <span class="item dept">{{users[0].ou}}</span>
+          <span class="item save-status">{{save.status}}</span>
+        </div>
+
+        <!--
+          <div class="right">
+            <span class="mode">Review</span>
+          </div>
+        -->
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="review_tabs_wrapper col-xs-10 col-xs-offset-1">
+          <div class="tabs">
+            <center>
+              <span ng-repeat="section in sections | orderBy:'order'" class="switch-tabs" ng-click="switchSection(section)" ng-class="{'active': sectionName == section.name}">{{section.blocktitle}}</span>
+            </center>
+          </div>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="review_wrapper multi-prompt-review_wrapper col-xs-10 col-xs-offset-1">
+
+            <div class="multi-prompt-criteria-fixed">
+
+              <div ui-view="contents"></div>
+
+            </div>
+
+        <ul ui-sortable='sortOptions' ng-model="users" class="row">
+
+            <li class="multi-prompt-item" ng-repeat="user in users">
+
+              <div class="multi-prompt-header">
+                <center>
+                  <img class="multi-prompt-profile-pic" src="/avatar/{{user.uid}}"></img>
+                  <!-- <img class="multi-prompt-profile-pic" src="http://dwskg.anim.dreamworks.com/dreampages/animation/images/{{user.employeeNumber}}.jpg"></img> -->
+                <div class="multi-prompt-uid">
+                <span class="uid" ng-click="goToUser(user, review_year, review_name)">{{user.cn}}</span>
+                <span class="glyphicon glyphicon-remove multi-remove-reviewer" ng-click="removeUser(user)" ></span>
+                <!--<span ng-click="user.showUserDropdown = !user.showUserDropdown" class="caret"></span> -->
+                </div>
+                <ul class="dropdown-menu">
+                  <li><a class="menuitem">test</a></li>
+                </ul>
+                <div class="bottombar">
+                  <span ng-show="multi_review_packet[user.uid].committed" class="glyphicon glyphicon-lock"></span>
+                  <span ng-show="multi_review_packet[user.uid].locked" class="glyphicon glyphicon-ok"></span>
+                </div>
+              </center>
+              </div>
+
+              <div class="col-xs-2 multi-prompt-col" ui-view="contents"></div>
+
+            </li>
+
+            <!-- Add another person -->
+            <li ng-show='possibleNewReviews().length' class="unsortable multi-prompt-item">
+
+              <div class="multi-prompt-header">
+                <center>
+                 <img class="multi-prompt-profile-pic" src="/avatar/addnew"></img>
+                <div class="multi-prompt-uid">
+
+                  <span class="dropdown" on-toggle="toggled(open)">
+                    <a href="javascript:" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-plus"></span>Add another review</a>
+                    <ul class="dropdown-menu">
+                      <li ng-repeat="review in possibleNewReviews()">
+                      <a ng-click="addReview(review.uid)">
+                        <img src={{review.user.picture}}></img>
+                        <span>{{review.user.cn}}</span>
+                      </a>
+                      </li>
+                    </ul>
+                  </span>
+
+                </div>
+                <div class="bottombar"> </div>
+              </center>
+              </div>
+              <div class="col-xs-2 multi-prompt-col"></div>
+
+            </li>
+
+        </ul>
+
+
+      </div>
+
+    </div>
+  </div>
+</div>

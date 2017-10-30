@@ -1,0 +1,61 @@
+#!/bin/env python
+
+import sys
+import path
+import json
+import tempfile
+from subprocess import call
+
+import mongodbutils
+
+if len(sys.argv) < 2:
+    print 'You need to pass the binary and host:port combination'
+    print ''
+    print 'USAGE'
+    print '\t%> init /path/to/bin/mongo host:port'
+    sys.exit(1)
+
+binary   = sys.argv[1]
+hostport = sys.argv[2]
+
+INITJS = '''
+// Init script
+//
+// Jeffrey Jose | Jan 16, 2015
+//
+
+// If this doesn't work, start init with "localhost" for host in host:port above (instead of the hostname)
+
+
+// Create `admin` user with role as 'root' (unrestricted access)
+db = db.getSiblingDB('admin')
+db.createUser({user: "admin", pwd: "%(password)s", roles:["root"]})
+
+// Create a user for perform db
+db.auth('admin', '%(password)s')
+db = db.getSiblingDB('perform')
+db.createUser({user: "admin", pwd: "%(password)s", roles:["dbOwner"]})
+'''
+
+
+# Setup the MongoDB database location
+print "[1/10]: Setting up the database path"
+try:
+    path.path('/usr/pic1/perform.mongodb').makedirs()
+except (IOError, OSError), e:
+    # Already exists
+    pass
+
+password = mongodbutils.getMasterPassword()
+
+initjs = INITJS % {'password': password}
+
+initjsFile = path.path(tempfile.mkstemp('.init.js')[1])
+fp = initjsFile.open('w')
+fp.write(unicode(initjs))
+fp.close()
+
+
+print "[2/10]: Initializing the database"
+call([binary, hostport, initjsFile ])
+initjsFile.unlink()

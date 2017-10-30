@@ -1,0 +1,110 @@
+
+<br/>
+<br/>
+<br/>
+<div class="adminMgmt" >
+    <center class="sections ">
+        <span class=" " ng-click="toggleViews('view')" ng-class="{'active': viewAdmins}">View Admins</span>
+        <span ng-click="toggleViews('edit')"  ng-class="{'active': editAdmins}" class="col-lg-offset-1">Edit Admins</span>
+        <span class="glyphicon glyphicon-question-sign pull-left" data-toggle="modal" data-target="#help-modal"></span>
+    </center>
+    <div ng-show="viewAdmins">
+        <div ng-repeat="record in allAdmins " class=" adminList">
+            <div class=" well col-lg-2 pull-left">
+                <span><b>{{record.uname+"("+record.uid+")"}}</b></span>
+                <div>{{"Department: " +  record.ou}}</div>
+                <span class="glyphicon glyphicon-remove pull-right" ng-click="removeAdmin(record)"  ></span>
+                <div>{{"Role: " +  record.roles}}</div>
+                <div >
+                    <span>Permissions: </span>
+                    <div class="roles" ng-repeat=" i in record.permissions">{{i}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-show="editAdmins">
+        <alert type="success" close="closeAlert()" ng-if="showSuccess"
+           dismiss-on-timeout="2000">Admin added successfully.</alert>
+        <center>
+            <input class='input-sm' type='text' autofocus ng-keyup='queryUsers(query)' ng-model=query placeholder='Search'>
+        </center>
+        <div class="row col-lg-11" >
+            <div  ng-repeat="user in usersByLocation|filter: query">
+                <div class="well col-lg-2 col-lg-offset-1">
+                    <div>{{user.givenName + " "+ user.surname+"("+user.uid+")"}}</div>
+                    <div>
+                     {{user.ou}}
+                    </div>
+                    <div>
+                        {{user.physicalDeliveryOfficeName}}
+                    </div>
+                    <span class="glyphicon glyphicon-plus addIcon pull-right" ng-click="addAdmin(user)" ></span>
+                    <br/>
+                    <span>Roles to be assigned:</span>
+                    <div ng-repeat="role in user.rolesToAssign" ng-click="removeRole(user, role.name)" class="roles" >
+                        <div ng-class="{'strikeRole':!(role.assigned)}"> {{role.name}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="help-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog help-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="modal-title">Roles and Permissions</h3>
+
+                    <hr/>
+                <h4><b>What do the permissions mean? </b></h4>
+                    <ul>
+                        <li><b>EDIT_REVIEWS:</b>  &nbsp; this permission lets you edit reviews for all departments but for your own. </li>
+                        <li><b>SETUP_REVIEWS:</b> &nbsp; this permission lets you setup reviews for all users but for your own, through the Admin Console. </li>
+                        <li><b>SETUP_ROLES:</b>  &nbsp; this permission lets you setup admins by allowing access to this page. </li>
+                        <li><b>EDIT_HR:</b>  &nbsp; this permission lets you setup/edit reviews for HR. </li>
+                    </ul>
+                    <hr/>
+                <div class="modal-body">
+                    <h4><b>Which role has what permissions?</b></h4>
+                    <ul ng-repeat="role in roles">
+                       <li> <h5><b>{{role.name}}</b></h5>
+                        <ul ng-repeat="permission in role.permissions"><li>{{permission}}</li></ul>
+                       </li>
+                    </ul>
+                </div>
+                <hr/>
+                <div>
+                    <h4><b>How To</b></h4>
+                    <ul>
+                        <li>
+                            <b>Add an Admin</b>
+                            <div>
+                                Click on Edit Admins, search for the user you want to assign roles to, <b>deselect the roles you don't want to assign</b> and then click on the plus icon.
+                                To confirm, go back to the View Admins link and check for the name of the user added along with permissions.
+                            </div>
+                        </li>
+                        <li>
+                            <b>Modify an Admin</b>
+                            <div>
+                                Click on Edit Admins, search for the user you want to assign roles to, deselect the roles you don't want to assign and then click on the plus icon. It will replace the existing record with updated roles.
+                                To confirm, go back to the View Admins link and check for the name of the user added along with permissions.
+                            </div>
+                        </li>
+                        <li>
+                            <b>Remove an Admin</b>
+                            <div>
+                                Click on View Admins, click on the cross button of the user you want to revoke the admin rights for.
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

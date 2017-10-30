@@ -1,0 +1,15 @@
+<center>
+<h3 ng-show='mode == "headings_only"' class="multi-header">{{prompt}}</h3>
+</center>
+<h3 ng-hide='mode == "headings_only"'></h3>
+<textarea ng-hide="mode=='headings_only'|| reviewDetails.committed || reviewDetails.locked"
+          onclick="this.select()"
+          class="multi-comments"
+          ng-model="review[modelkey(prompt, 'notes')]"
+          placeholder="{{prompt}}">
+</textarea>
+<div class="multi-comments-readonly"
+     ng-show="reviewDetails.committed || reviewDetails.locked"
+     ng-bind-html="review[modelkey(prompt, 'notes')] | MarkdownFilter">
+
+</div>

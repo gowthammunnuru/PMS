@@ -1,0 +1,43 @@
+<center>
+<div class="footer">
+{% if review_type == 'review' %}
+  <div>
+  {% if timeline['COMMIT_REVIEW'] %}
+  <!--Committed on {{timeline['COMMIT_REVIEW'].strftime("%B  %d, %Y %I:%M %p")}} -->
+
+
+    <div>
+    {% if timeline['PUBLISH_REVIEW'] %}
+      Published on {{timeline['PUBLISH_REVIEW'].strftime("%B  %d, %Y %I:%M %p")}}
+
+
+      <div>
+      {% if timeline['ACKNOWLEDGE_REVIEW'] %}
+      Acknowledged by {{reviewuser_name}} on {{timeline['ACKNOWLEDGE_REVIEW'].strftime("%B  %d, %Y %I:%M %p")}}
+      {% else %}
+        This review is not yet acknowledged by {{reviewuser_name}}
+      {% end %}
+      </div>
+
+
+    {% else %}
+      This review is not yet published by the reviewers
+    {% end %}
+    </div>
+
+  {% else %}
+    This review is not yet committed by the reviewers
+  {% end %}
+  </div>
+
+{% else %}
+  <div>
+  {% if timeline['COMMIT_REVIEW'] %}
+  <!--Committed on {{timeline['COMMIT_REVIEW'].strftime("%B  %d, %Y %I:%M %p")}} -->
+  {% else %}
+    This review is not yet committed by {{reviewuser_name}}
+  {% end %}
+  </div>
+{% end %}
+</div>
+</center>

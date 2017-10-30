@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="perform">
+    <head>
+        <link rel="stylesheet" href="static/external/bootstrap/css/bootstrap.css" media="all">
+
+
+        <!-- Handcrafted styles -->
+        <link rel="stylesheet" href='static/css/print.css' type="text/css" media="print">
+        <link rel="stylesheet" href='static/css/app.css' type="text/css" media="all">
+        <link rel="stylesheet" href='static/css/user.css' type="text/css" media="all">
+        <link rel="stylesheet" href='static/css/user.preview.css' type="text/css" media="all">
+        <link rel="stylesheet" href='static/css/landing.css' type="text/css" media="all">
+        <link rel="stylesheet" href='static/css/home.css' type="text/css" media="all">
+        <link rel="stylesheet" href='static/css/feedback.form.css' type="text/css" media="all">
+        <link rel="stylesheet" href='static/css/dialog.css' type="text/css" media="all">
+        <link rel="stylesheet" href='static/css/dialog.multireview.css' type="text/css" media="all">
+        <link rel="stylesheet" href='static/css/dialog.leavefeedback.css' type="text/css" media="all">
+        <link rel="stylesheet" href='static/css/dialog.detailedstats.css' type="text/css" media="all">
+        <link rel="stylesheet" href='static/css/dialog.acknowledgereview.css' type="text/css" media="all">
+        <link rel="stylesheet" href='static/css/admin.css' type="text/css" media="all">
+        <link rel="stylesheet" href='static/css/autherror.css' type="text/css" media="all">
+        <link rel="stylesheet" href='static/css/bootstrap.css' type="text/css" media="all">
+        <link rel="stylesheet" href='static/css/setup.templates.css' type="text/css" media="all">
+        <link rel="stylesheet" href='static/css/setup.templates.preview.css' type="text/css" media="all">
+        <link rel="stylesheet" href='static/css/9box.css' type="text/css" media="all">
+        <link id="favicon" rel="icon" type="image/png" href="static/media/images/favicon.png">
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-fixed-top">
+
+          <div class="logo">
+			  <a class="navbar-brand" href="javascript:" ng-click="goToHome()">
+              <span class="logoimg"></span>
+              perform
+            </a>
+          </div>
+
+          <ul ng-show="Auth.getStatus()" class="nav navbar-nav pull-right">
+              <div class="dropdown" dropdown is-open="namemenu.isopen">
+                <li class="navbar-item dropdown-toggle" dropdown-toggle ng-diasbled="disabled">{{Auth.getUser().cn}}<span class="caret"></span> </li>
+                <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                  <li ng-if='Auth.isAdmin() && Auth.userHasEditReviewsRights()' role="presentation"><a role="menuitem" tabindex="-1" ng-click="BG.go('admin.landing', {}, {reload: true})">Admin Console</a></li>
+                  <li ng-if='Auth.isAdmin() && Auth.userHasAdminMgmtRights()' role="presentation"><a role="menuitem" tabindex="-1" ng-click="BG.go('admin.mgmt', {}, {reload: true})">Admin Management</a></li>
+                  <li ng-if='Auth.isAdmin()' class="divider"></li>
+                  <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="Auth.logout();cache.reset();">Logout</a></li>
+                </ul>
+              </div>
+          </ul>
+
+        </div>
+
+        <div changebg=showLoading></div>
+
+        <div class="col-xs-6 col-xs-offset-3 top-banner initial-hide" ng-style=showConnectionLostBanner>
+          <center>
+            <p>
+              <span>Connection to server lost.</span>
+              <!--<span class="auto-reload">Reloading in 5 ..</span>-->
+              <span class="reload" ng-click="$window.location.reload()">Reload now</span>
+            </p>
+          </center>
+        </div>
+
+        <ui-view></ui-view>
+        <footer><center> &copy; Dreamworks Animation LLC. All rights reserved.<img class="pull-right" src="/static/media/dwa.logo.png" style="width: 90px; padding-right: 30px; padding-top:5px"/></center></footer>
+
+        <!-- Loading all scripts at the end gives the browser a chance to display something -->
+        <!-- before it starts executing javascript, which will inevitably block. -->
+        <script src="static/external/jquery.min.js"></script>
+        <script src="static/external/jquery-ui-1.10.4.min.js"></script>
+        <script src="static/external/bootstrap/js/bootstrap.min.js"> </script>
+        <script src="static/external/lodash.min.js"> </script>
+        <script src="static/external/reconnecting-websocket.min.js"> </script>
+
+        <script src="static/external/angular.min.js"></script>
+        <script src="static/external/angular-route.min.js"></script>
+        <script src="static/external/angular-sanitize.min.js"></script>
+        <script src="static/external/angular-cookies.min.js"></script>
+
+
+        <script src="static/external/angular-ui-router.js"> </script>
+        <script src="static/external/angular-ui-sortable.min.js"> </script>
+        <script src="static/external/ui-utils.js"> </script>
+        <script src="static/external/ui-bootstrap-tpls-0.12.0.min.js"> </script>
+
+        <script type="text/javascript" src="static/external/moment.js"> </script>
+        <!--<script type="text/javascript" src="http://web.ddu-india.com/thirdParty/underscore/current/underscore.min.js"> </script> -->
+        <script src="static/external/jspdf.min.js"></script>
+        <script src="static/external/moment-timezone-with-data.min.js"></script>
+        <script src="static/external/jstz.min.js"></script>
+        <script src="static/external/showdown.js"></script>
+        <script src="static/external/extensions/newline.js"></script>
+
+
+        <!-- Handrolled javascript goodness goes here.. -->
+        <script src="static/js/app.js"> </script>
+        <script src="static/js/routes.js"> </script>
+        <script src="static/js/services/Cache.js"> </script>
+        <script src="static/js/services/Review.js"> </script>
+        <script src="static/js/services/Auth.js"> </script>
+        <script src="static/js/services/services.js"> </script>
+        <script src="static/js/services/Portal.js"> </script>
+        <script src="static/js/services/Template.js"> </script>
+        <script src="static/js/services/Utils.js"> </script>
+        <script src="static/js/services/Colors.js"> </script>
+        <script src="static/js/services/NineBox.js"> </script>
+        <script src="static/js/services/Pagination.js"></script>
+
+        <!-- Widgets -->
+        <script src="static/widgets/prompt.js"> </script>
+        <link rel="stylesheet" href='static/widgets/prompt.css' type="text/css", media="all">
+
+        <script src="static/widgets/section.js"> </script>
+
+        <script src="static/widgets/pagebreak.js"> </script>
+        <link rel="stylesheet" href='static/widgets/pagebreak.css' type="text/css" media="all">
+
+        <script src="static/widgets/review.js"> </script>
+        <link rel="stylesheet" href='static/widgets/review.css' type="text/css" media="all">
+
+        <script src="static/widgets/comment.js"> </script>
+        <link rel="stylesheet" href='static/widgets/comment.css' type="text/css" media="all">
+
+        <script src="static/widgets/page.js"> </script>
+        <link rel="stylesheet" href='static/widgets/page.css' type="text/css" media="all">
+
+        <script src="static/widgets/previewHeader.js"> </script>
+        <script src="static/widgets/previewFooter.js"> </script>
+
+        <!-- <ninebox></ninebox> isnt meant to be used in templates, but its a widget nevertheless -->
+        <script src="static/widgets/ninebox.js"> </script>
+        <link rel="stylesheet" href='static/widgets/ninebox.css' type="text/css" media="all">
+
+
+        <script src="static/js/controllers/LoginCtrl.js"> </script>
+        <script src="static/js/controllers/HomeCtrl.js"> </script>
+        <script src="static/js/controllers/AuthErrorCtrl.js"> </script>
+        <script src="static/js/controllers/FeedbackFormCtrl.js"> </script>
+        <script src="static/js/controllers/AdminCtrl.js"> </script>
+        <script src="static/js/controllers/AdminMgmtCtrl.js"> </script>
+        <script src="static/js/controllers/AcquireReviewLock.js"> </script>
+        <script src="static/js/controllers/SetupReviewsCtrl.js"> </script>
+        <script src="static/js/controllers/SetupTemplatesCtrl.js"> </script>
+        <script src="static/js/controllers/9BoxCtrl.js"> </script>
+
+        <script src="static/js/controllers/DialogPublishCtrl.js"> </script>
+        <script src="static/js/controllers/DialogCommitCtrl.js"> </script>
+        <script src="static/js/controllers/DialogDetailedStatsCtrl.js"> </script>
+        <script src="static/js/controllers/DialogBacklogDetailedStatsCtrl.js"> </script>
+        <script src="static/js/controllers/DialogMultiReviewConfirmCtrl.js"> </script>
+        <script src="static/js/controllers/DialogLeaveFeedbackCtrl.js"> </script>
+        <script src="static/js/controllers/DialogAcknowledgeCtrl.js"> </script>
+        <script src="static/js/controllers/DialogUserStatsCtrl.js"> </script>
+
+        <script src="static/js/controllers/UserCtrl.js"> </script>
+        <script src="static/js/controllers/UserReviewCtrl.js"> </script>
+        <script src="static/js/controllers/UserReviewPreviewCtrl.js"> </script>
+        <script src="static/js/controllers/UserReviewSettingsCtrl.js"> </script>
+
+        <script src="static/js/controllers/MultiUserCtrl.js"> </script>
+        <script src="static/js/controllers/MultiUserReviewCtrl.js"> </script>
+
+        <script src="static/js/filters/BreakNewLineFilter.js"> </script>
+        <script src="static/js/filters/MarkdownFilter.js"> </script>
+        <script src="static/js/filters/AddedReviewersFilter.js"> </script>
+        <script src="static/js/filters/UserFilter.js"> </script>
+        <script src="static/js/filters/MultipleKeywordFilter.js"> </script>
+
+        <script src="static/js/directives/autofocus.js"> </script>
+        <script src="static/js/directives/width-with-offset.js"> </script>
+        <script src="static/js/directives/changebg.js"> </script>
+        <script src="static/js/directives/autogrow.js"> </script>
+        <script src="static/js/directives/removespaces.js"> </script>
+        <script src="static/js/directives/showautofocus.js"> </script>
+
+    </body>
+</html>
+

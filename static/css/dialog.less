@@ -1,0 +1,134 @@
+
+.dialog-commit-window {
+
+    .dialog {
+        height: 200px;
+        }
+    }
+.dialog {
+
+
+    .header {
+        height: 30px;
+        background-color: #009688;
+        vertical-align: middle;
+        display: table-cell;
+        width: 900px;
+        padding-left: 10px;
+        color: white;
+        font-size: 16px;
+		z-index: 99999;
+        }
+
+    .glyphicon {
+        font-size: 60px;
+        float: left;
+        margin: 26px 0px 0px 40px;
+        }
+
+    .glyphicon.warn {
+        color: #ffa000;
+        }
+
+    .glyphicon.active {
+        color: #009688;
+        }
+
+    .body {
+
+
+        padding: 10px;
+        height: 115px;
+        display: inline-block;
+
+        &.publish {
+            height: 130px;
+            }
+
+        .missing-modelkeys {
+            font-size: 12px;
+            text-align: center;
+            color: #F44336;
+
+            &.head {
+                text-align: center;
+                font-weight: bold;
+                margin-top: 5px;
+                }
+
+            &.tail {
+                font-weight: bold;
+                text-align: right;
+                }
+            }
+
+        div.body {
+
+            position: absolute;
+            right: 10px;
+
+            }
+
+        div.extra-confirmation-2 {
+        }
+
+        div.extra-confirmation {
+            position: absolute;
+            right: 20px;
+            bottom: 37px;
+            color: #F44336;
+
+            div {
+                float: right;
+                }
+
+            input {
+                width: 110px;
+                margin-top: 10px;
+                font-size: 12px;
+                padding-left: 5px;
+                }
+            }
+
+
+
+        .buttons {
+            position: absolute;
+            right: 8px;
+            bottom: 5px;
+
+            .btn {
+                color: white;
+                }
+
+            .btn-cancel {
+
+                background-color: #E6E6E6;
+                color: #333;
+
+                &:hover {
+                    background-color: #DDDDDD;
+                    }
+                }
+
+            .btn-ok {
+
+                background-color: #009688;
+
+                &:hover {
+                    background-color: #00897b;
+                    }
+
+
+                &.btn-disabled {
+                    background-color: #80CBC4;
+                    }
+                }
+
+        }
+
+
+        }
+
+
+    }

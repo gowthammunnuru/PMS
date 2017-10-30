@@ -1,0 +1,27 @@
+<div class="dialog-multireview">
+  <div class="header"><span>Incompatible reviews</span></div>
+
+  <div class="contents">
+  <h4>Not all the reviews belong to the same kind. Select one of the groups from below.</h4>
+
+    <div ng-click="goToMultiReview(group)" class="item-group" ng-repeat="(key, group) in groups">
+      <span class="badge year">{{group[0].year}}</span>
+      <span class="badge rname">{{group[0].rname}}</span>
+      <span class="badge {{group[0].review_type}}">{{group[0].review_type}}</span>
+      <span class="template">template: {{group[0].template_id}}</span>
+
+      <div class="item">
+        <img ng-repeat="item in group" ng-src="/avatar/{{item.user.uid}}">
+        <!-- <img ng-repeat="item in group" ng-src="http://dwskg.anim.dreamworks.com/dreampages/animation/images/{{item.user.employeeNumber}}.jpg"> -->
+        <div class="right" ng-click="goToMultiReview(group)"><span class="glyphicon glyphicon-arrow-right"></span><span>Review this group ({{group.length}})</span></div>
+       <!-- <div class="right" ng-click="removeGroup(key)"><span class="glyphicon glyphicon-remove"></span><span>Remove this group</span></div>-->
+      </div>
+
+    </div>
+
+     <div class="buttons">
+        <button ng-click="cancel()" class="btn btn-default btn-sm btn-cancel">Cancel</button>
+		<!-- <button ng-disabled='!okToProceed' ng-click="ok()" class="btn btn-default btn-sm btn-ok"><span class="glyphicon glyphicon-arrow-right"></span>Proceed to review</button>-->
+      </div>
+    </div>
+</div>

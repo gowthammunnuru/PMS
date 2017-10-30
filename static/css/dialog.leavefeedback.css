@@ -1,0 +1,80 @@
+.dialog-leave-feedback-wrapper > div {
+  width: 800px;
+}
+.dialog-leave-feedback-wrapper {
+  /* Commenting out because we dont want multiple people */
+  /*min-height: 300px; */
+}
+.dialog-leave-feedback-wrapper .header {
+  height: 30px;
+  background-color: #009688;
+  vertical-align: middle;
+  display: table-cell;
+  width: 900px;
+  padding-left: 10px;
+  color: white;
+  font-size: 16px;
+}
+.dialog-leave-feedback-wrapper .contents {
+  padding: 10px;
+}
+.dialog-leave-feedback-wrapper .contents .user:hover {
+  background-color: #f5f5f5;
+}
+.dialog-leave-feedback-wrapper .contents .user.add-another {
+  cursor: pointer;
+}
+.dialog-leave-feedback-wrapper .contents img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin: 5px;
+}
+.dialog-leave-feedback-wrapper .contents input {
+  width: 300px;
+  height: 40px;
+}
+.dialog-leave-feedback-wrapper .contents .remove span {
+  top: 2px;
+  cursor: pointer;
+  color: #afafaf;
+}
+.dialog-leave-feedback-wrapper .contents .remove span:hover {
+  color: #646464;
+}
+.dialog-leave-feedback-wrapper .contents .status {
+  color: red;
+}
+.dialog-leave-feedback-wrapper .contents .glyphicon {
+  margin-right: 5px;
+}
+.dialog-leave-feedback-wrapper .message {
+  margin-top: -10px;
+  float: right;
+}
+.dialog-leave-feedback-wrapper .bottombar {
+  margin-top: 40px;
+}
+.dialog-leave-feedback-wrapper .buttons {
+  position: absolute;
+  right: 8px;
+  bottom: 5px;
+}
+.dialog-leave-feedback-wrapper .buttons .glyphicon {
+  margin-right: 5px;
+}
+.dialog-leave-feedback-wrapper .buttons .btn {
+  color: white;
+}
+.dialog-leave-feedback-wrapper .buttons .btn-cancel {
+  background-color: #bdbdbd;
+}
+.dialog-leave-feedback-wrapper .buttons .btn-cancel:hover {
+  background-color: #9e9e9e;
+}
+.dialog-leave-feedback-wrapper .buttons .btn-ok {
+  background-color: #009688;
+}
+.dialog-leave-feedback-wrapper .buttons .btn-ok:hover {
+  background-color: #00897b;
+}

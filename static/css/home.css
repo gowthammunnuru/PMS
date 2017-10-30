@@ -1,0 +1,327 @@
+footer {
+  position: fixed;
+  bottom: 0;
+  background: #ccc;
+  width: 100%;
+  padding: 2px;
+}
+.home-col-card,
+.task-col-card {
+  box-shadow: 0 0 0 1px #d1d1d1,0 0 4px 1px #ccc;
+  background-color: white;
+  min-height: 500px;
+}
+.home-col h3,
+.task-col h3 {
+  border-bottom: 1px solid #c8c8c8;
+  padding: 10px 0px;
+  margin-bottom: 0px;
+  color: #585858;
+}
+.home-col .col-user h3 {
+  background-color: #f1f1f1;
+  box-shadow: 0 0 0 1px #d1d1d1,0 0 4px 1px #ccc;
+}
+.home-col .profile-pic {
+  border-radius: 50%;
+  height: 150px;
+  width: 150px;
+  margin: 10px;
+}
+.home-col .fullname {
+  font-weight: bold;
+}
+.home-col .row {
+  height: 90%;
+}
+.home-col .banner {
+  height: 100%;
+  width: 200px;
+  margin-left: 15px;
+}
+.home-col .reviews {
+  font-size: 12px;
+}
+.home-col .reviews .no-reviews {
+  color: #969696;
+}
+.home-col .reviews .years span.link {
+  margin: 0px 5px;
+  cursor: pointer;
+}
+.home-col .reviews .years span.link.review_locked_false {
+  color: #C9C9C9;
+  pointer-events: none;
+}
+.home-col .reviews .years span.badge {
+  margin: 0px 5px;
+  cursor: default;
+}
+.home-col .reviews .years span.link:hover {
+  text-decoration: underline;
+}
+.home-col .reviews .years div {
+  margin: 5px 0px;
+}
+.home-col .reviews .years .badge {
+  border-radius: 0px;
+}
+.home-col .reviews .years .badge.year {
+  background-color: #90a4ae;
+}
+.home-col .reviews .years .badge.rname {
+  background-color: #9575cd;
+  margin: 0px;
+}
+.home-col .reviews .years .badge.hideme {
+  opacity: 0;
+}
+.home-col .col-tasks .contents {
+  overflow-y: auto;
+}
+.tasks {
+  width: 450px;
+}
+.task-col .col-tasks h3 {
+  background-color: #f1f1f1;
+  box-shadow: 0 0 0 1px #d1d1d1,0 0 4px 1px #ccc;
+}
+.task-col .glyphicon-workflow {
+  font-size: 28px;
+  margin: 10px;
+}
+.task-col .workflow {
+  cursor: pointer;
+  border-bottom: 1px solid #dcdcdc;
+  padding: 10px;
+  background-color: #26A69A;
+  color: white;
+}
+.task-col .workflow .text {
+  font-size: 16px;
+  height: 100%;
+  margin-left: 5px;
+  position: relative;
+  top: -5px;
+}
+.task-col .workflow:hover {
+  background-color: #009688;
+}
+.task-col .row {
+  margin: 0px;
+  border-bottom: 1px solid #dcdcdc;
+  min-height: 385px;
+  padding: 10px;
+}
+.task-col .row .hr {
+  margin: 10px 0px 0px 0px;
+}
+.task-col .row .stats-border {
+  margin: 5px -14px -5px -14px;
+}
+.task-col .row .progress {
+  cursor: pointer;
+  padding: 0px 0px;
+  margin-top: 5px;
+}
+.task-col .row .progress .progress-bar {
+  box-shadow: none;
+}
+.task-col .row .progress .progress-bar-almost-success {
+  background-color: #7CB342;
+}
+.task-col .row .progress .progress-bar-primary {
+  background-color: #8bc34a;
+}
+.task-col .row .progress .progress-bar-progress {
+  background-color: #cddc39;
+}
+.task-col .row .progress .progress-bar-danger {
+  background-color: #ffc107;
+}
+.task-col .row .show-statistics,
+.task-col .row .show-all {
+  float: left;
+  font-size: 12px;
+  cursor: pointer;
+  height: 30px;
+  margin: -10px 0px 10px 12px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+}
+.task-col .row .show-statistics:hover,
+.task-col .row .show-all:hover {
+  color: #009688;
+}
+.task-col .row .show-statistics input,
+.task-col .row .show-all input {
+  cursor: pointer;
+  left: 3px;
+  top: -3px;
+}
+.task-col .row .show-all {
+  margin-top: -25px;
+}
+.task-col .row .show-archived {
+  float: left;
+  font-size: 12px;
+  cursor: pointer;
+  height: 30px;
+  margin: -10px 15px;
+  padding: 0px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+}
+.task-col .row .show-archived:hover {
+  color: #009688;
+}
+.task-col .row .show-archived input {
+  cursor: pointer;
+  left: 3px;
+  top: -3px;
+}
+.task-col .row .search {
+  float: right;
+  cursor: pointer;
+  font-size: 12px;
+  color: gray;
+  left: 8px;
+  padding-right: 2px;
+}
+.task-col .row .search:hover {
+  color: #333;
+}
+.task-col .row .search .glyphicon.active {
+  color: #333;
+}
+.task-col .row .filter {
+  margin-bottom: 12px;
+  margin-top: -5px;
+}
+.task-col .row .multi-review {
+  clear: both;
+  background-color: #009688;
+  color: white;
+  padding-top: 3px;
+  height: 25px;
+  cursor: pointer;
+  margin: 5px 0px;
+  font-size: 12px;
+}
+.task-col .row .multi-review .glyphicon {
+  margin-right: 5px;
+}
+.task-col .row .multi-review:hover {
+  background-color: #00897b;
+}
+.task-col .row .stats-border-search {
+  margin: 5px -4px 5px -5px;
+}
+.task-col .row .archived-search-hint {
+  margin-top: 10px;
+}
+.task-col .row .archived-search-hint hr {
+  margin-bottom: 10px;
+}
+.task-col .row .clear-filter {
+  color: #333;
+  cursor: pointer;
+}
+.task-col .row .clear-filter:hover {
+  color: #009688;
+}
+.task-col .row .no-pending {
+  margin-top: 20px;
+}
+.tab {
+  clear: both;
+}
+.tab div.item {
+  clear: both;
+  padding: 5px;
+  cursor: pointer;
+  margin-left: -10px;
+  transition: margin-left ease-in-out 100ms, padding-left ease-in-out 100ms;
+}
+.tab div.item.item_self-review {
+  background-color: #E0F2F1;
+}
+.tab div.item.selected {
+  background-color: #efefef !important;
+  margin-left: 0px;
+  padding-left: 20px;
+}
+.tab div.item.selected .checkbox {
+  opacity: 1;
+}
+.tab div.item .checkbox {
+  display: inline;
+  margin-right: -25px;
+  margin-left: 10px;
+  top: 0px;
+  left: -30px;
+  opacity: 0;
+  padding: 10px 20px;
+}
+.tab div.item .checkbox input {
+  left: 34px;
+  top: 9px;
+  cursor: pointer;
+}
+.tab div.item:hover {
+  background-color: #f5f5f5;
+  margin-left: 0px;
+  padding-left: 20px;
+}
+.tab div.item:hover .checkbox {
+  opacity: 1;
+}
+.tab .avatar {
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.tab .name {
+  position: absolute;
+  margin-top: 0px;
+  z-index: 100;
+}
+.tab .time-since {
+  float: right;
+  margin: 14px 10px;
+  color: #969696;
+  font-size: 12px;
+  letter-spacing: -1px;
+}
+.tab .rightside {
+  float: right;
+  color: #26A69A;
+  margin: 13px 10px 0px 0px;
+}
+.tab .rightside.text {
+  color: #969696;
+}
+.tab .rightside.text.percentage_bucket_10,
+.tab .rightside.text.percentage_bucket_9,
+.tab .rightside.text.percentage_bucket_8 {
+  color: #26A69A;
+  font-weight: bold;
+}
+.tab .rightside.text.percentage_bucket_4,
+.tab .rightside.text.percentage_bucket_5,
+.tab .rightside.text.percentage_bucket_6,
+.tab .rightside.text.percentage_bucket_7,
+.tab .rightside.text.percentage_bucket_8 {
+  font-weight: bold;
+}
+.tab .bottombar {
+  margin-left: 80px;
+  position: absolute;
+  margin-top: -28px;
+}
+.tab .badge {
+  font-size: 10px;
+}

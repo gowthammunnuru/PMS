@@ -1,0 +1,18 @@
+<div class="dialog">
+	<div class="header align-center"><span>{{dept}} Statistics - {{header_text}}</span></div>
+
+  <div class="body detailed-stats">
+	  <div ng-if='filtered_users.length>0' class='clearfix category complete'>
+      <ul>
+        <li ng-click="goToUserReview(uid)" ng-repeat='uid in filtered_users track by $index'><img class='img-responsive img-circle' src='/avatar/{{uid}}' />{{getFullName(uid)}}</li>
+        <li ng-if="inactive_users" class="inactive" ng-repeat="iuser in inactive_users"><img class="img-responsive img-circle" src='/avatar/{{iuser}}'/>{{iuser}} (inactive)</li>
+       <!--  <li ng-click="goToUserReview(uid)" ng-repeat='uid in filtered_users track by $index'><img class='img-responsive img-circle' ng-src='http://dwskg.anim.dreamworks.com/dreampages/animation/images/{{getEmployeeNumber(uid)}}.jpg' />{{getFullName(uid)}}</li>
+        <li ng-if="inactive_users" class="inactive" ng-repeat="iuser in inactive_users"><img class="img-responsive img-circle" ng-src='http://dwskg.anim.dreamworks.com/dreampages/animation/images/{{iuser}}.jpg'/>{{iuser}} (inactive)</li> -->
+      </ul>
+    </div>
+    <div class="buttons">
+    <button ng-disabled='missingModelKeys.length' ng-click="ok()" class="btn btn-sm btn-ok">Close</button>
+    </div>
+
+  </div>
+</div>

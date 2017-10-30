@@ -1,0 +1,26 @@
+<div class="dialog">
+  <div class="header"><span>{{messages.header}}</span></div>
+  <span class="glyphicon active {{messages.icon}}"></span>
+  <div class="body publish">
+
+    <div class="body">{{messages.body}}</div>
+
+    <div ng-show="messages.validate" class="extra-confirmation">
+      <div>
+      <span>Please enter the first name of the employee:</span>
+      <input class="input-xs" ng-change='messages.validateFn(extra_confirmation)' ng-model="extra_confirmation"></input>
+      </div>
+
+      <div>
+      <span>I have incorporated changes communicated to me by HR, if any</span>
+      <input class="input-xs" placeholder="Your initials ({{selfInitials}})" ng-change='messages.validateFn_self(extra_confirmation_self)' ng-model="extra_confirmation_self"></input>
+      </div>
+    </div>
+
+    <div class="buttons">
+    <button ng-click="cancel()" class="btn btn-default btn-sm btn-cancel">{{messages.buttons.cancel}}</button>
+    <button ng-disabled='messages.validate && !(messages.validateFn(extra_confirmation) && messages.validateFn_self(extra_confirmation_self))' ng-click="ok()" class="btn btn-default btn-sm btn-ok">{{messages.buttons.ok}}</button>
+    </div>
+
+  </div>
+</div>

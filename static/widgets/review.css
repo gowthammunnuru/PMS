@@ -1,0 +1,19 @@
+
+.preview-review-title {
+    display: block;
+    width: 100%;
+    background-color: #009688;
+    margin-top: 10px;
+    border-top: 1px solid rgb(196, 196, 196);
+    height: 45px;
+    vertical-align: middle;
+    width: 102%;
+    margin-left: -1%;
+}
+
+.preview-review-title span {
+    color: white;
+    font-size: 30px;
+    margin-left: 10px;
+}
+

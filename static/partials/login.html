@@ -1,0 +1,41 @@
+<head>
+<title>login - perform</title>
+</head>
+
+<div class="container-fluid">
+  <div class="jumbotron">
+
+    <center style="margin-top: 100px">
+      <form ng-submit="login(auth)">
+      <!-- {% module xsrf_form_html() %} -->
+      <div class="loginbox">
+        <div class="row">
+          <div class="picture col-xs-4">
+            <img ng-if='auth.user || auth.pass' ng-src="/avatar/{{auth.user}}">
+
+            <!-- <img ng-if='auth.user || auth.pass' ng-src="http://dwskg.anim.dreamworks.com/dreampages/animation/images/{{empNumber}}.jpg"> -->
+
+          </div>
+          <div class="inputcombo col-xs-8">
+            <center>
+              <div class="logo">
+                <span ng-click='$state.go("home")' class="login-logo"></span>
+                <span class="login-logotext">perform</span>
+              </div>
+            </center>
+            <input ng-class="{'auth_error': auth_error}" autofocus ng-change='keychange()' ng-model-options="{ updateOn: 'default blur', debounce: { default: 2000, blur: 0 } }" placeholder="Username" class="username input-xs" ng-model="auth.user" type="text" />
+            <input ng-class="{'auth_error': auth_error}" placeholder="Password" class="password input-xs" ng-model="auth.pass" type="password" />
+            <span ng-if=auth_error class="auth_error">Username and/or password incorrect.</span>
+            <div class="buttons">
+              <button class="btn btn-default clear" type="button" ng-click="clear()">Clear</button>
+              <button class="btn btn-default signin" type="submit">Sign in</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      </form>
+    </center>
+
+  </div>
+</div>

@@ -1,0 +1,25 @@
+.dialog-acknowledge-review .message {
+  padding: 10px;
+  height: 100px;
+}
+.dialog-acknowledge-review .buttons {
+  position: absolute;
+  right: 8px;
+  bottom: 5px;
+}
+.dialog-acknowledge-review .buttons .btn {
+  color: white;
+}
+.dialog-acknowledge-review .buttons .btn-cancel {
+  background-color: #E6E6E6;
+  color: #333;
+}
+.dialog-acknowledge-review .buttons .btn-cancel:hover {
+  background-color: #DDDDDD;
+}
+.dialog-acknowledge-review .buttons .btn-ok {
+  background-color: #009688;
+}
+.dialog-acknowledge-review .buttons .btn-ok:hover {
+  background-color: #00897b;
+}

@@ -1,0 +1,24 @@
+<head>
+    <title>You are on the wait list</title>
+</head>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<div>
+
+        <center>
+
+            <h1 ng-show="isCurrentlyEditedBy && isCurrentlyEditedBy != 'admin'"><span ng-repeat="reviewer in isCurrentlyEditedBy"><a href={{"http://portal.ddu-india.com/profile/"+reviewer}} target="_blank">{{reviewer+"&nbsp"}}</a></span> acquired the busy button on this review. Please contact them to release it.</h1>
+            <h1 ng-hide="isCurrentlyEditedBy && isCurrentlyEditedBy != 'admin'">You have released the busy button for the current review!</h1>
+            <div class="autherror-buttons" ng-show="isCurrentlyEditedBy || lockReleased">
+                <button class="btn btn-req-access" ng-click="$state.go('landing.home')" >Home</button>
+            </div>
+            <div class="well" ng-show="isCurrentlyEditedBy || lockReleased">
+            <img ng-show="isCurrentlyEditedBy && isCurrentlyEditedBy != 'admin' " ng-src={{image}} class="img-responsive img-thumbnail">
+            <img ng-hide="isCurrentlyEditedBy && isCurrentlyEditedBy != 'admin'" src="/static/media/busyBtnRelease.jpg" width="800" class="img-responsive img-thumbnail">
+            </div>
+        </center>
+</div>
+

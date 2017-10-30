@@ -1,0 +1,134 @@
+table.ninebox .ninebox-row .ninebox-cell {
+  width: 33%;
+  transition: background-color ease-in-out 50ms;
+  border: 2px solid white;
+  color: white;
+}
+table.ninebox .ninebox-row .ninebox-cell .cell-label {
+  padding: 2px 5px;
+  font-weight: bold;
+  float: right;
+}
+table.ninebox .ninebox-row .ninebox-cell ul {
+  list-style: none;
+  margin: 35px 0px 0px 0px;
+  padding: 0px;
+  overflow-y: auto;
+}
+table.ninebox .ninebox-row .ninebox-cell ul .item {
+  min-width: 150px;
+  cursor: default;
+  margin: 5px;
+  padding: 3px 7px 3px 10px;
+  list-style-type: none;
+  background-color: whitesmoke;
+  color: #3A3A3A;
+  float: left;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+}
+table.ninebox .ninebox-row .ninebox-cell ul .item:hover {
+  background-color: white;
+}
+table.ninebox .ninebox-row .ninebox-cell ul .item .left {
+  position: relative;
+  top: 4px;
+}
+table.ninebox .ninebox-row .ninebox-cell ul .item .left .pic {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+}
+table.ninebox .ninebox-row .ninebox-cell ul .item .left .name {
+  position: relative;
+  top: 2px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+table.ninebox .ninebox-row .ninebox-cell ul .item .left .name:hover {
+  color: #009688;
+}
+table.ninebox .ninebox-row .ninebox-cell ul .item .percent {
+  margin-left: 20px;
+  font-size: 12px;
+  float: right;
+  position: relative;
+  color: gray;
+  cursor: default;
+}
+table.ninebox .ninebox-row .ninebox-cell ul .item .percent div {
+  text-align: right;
+  letter-spacing: -1px;
+}
+table.ninebox .ninebox-row .ninebox-cell ul .item .percent div.performance:hover {
+  color: #E64A19;
+}
+table.ninebox .ninebox-row .ninebox-cell ul .item .percent div.potential:hover {
+  color: #689F38;
+}
+table.ninebox .ninebox-row .ninebox-cell.ninebox-cell-rank-A {
+  background-color: #4CAF50;
+}
+table.ninebox .ninebox-row .ninebox-cell.ninebox-cell-rank-B {
+  background-color: #8BC34A;
+}
+table.ninebox .ninebox-row .ninebox-cell.ninebox-cell-rank-C {
+  background-color: #CDDC39;
+}
+table.ninebox .ninebox-row .ninebox-cell.ninebox-cell-rank-D {
+  background-color: #FF9800;
+}
+table.ninebox .ninebox-row .ninebox-cell.ninebox-cell-zero {
+  background-color: #8BC34A;
+}
+table.ninebox .ninebox-row .ninebox-cell.ninebox-cell-zero:hover {
+  background-color: #7CB342;
+}
+table.ninebox .ninebox-row .ninebox-cell.ninebox-cell-one {
+  background-color: #4CAF50;
+}
+table.ninebox .ninebox-row .ninebox-cell.ninebox-cell-one:hover {
+  background-color: #43A047;
+}
+table.ninebox .ninebox-row .ninebox-cell.ninebox-cell-two {
+  background-color: #056F00;
+}
+table.ninebox .ninebox-row .ninebox-cell.ninebox-cell-two:hover {
+  background-color: #046500;
+}
+table.ninebox .ninebox-row .ninebox-cell.ninebox-cell-three {
+  background-color: #CDDC39;
+}
+table.ninebox .ninebox-row .ninebox-cell.ninebox-cell-three:hover {
+  background-color: #C0CA33;
+}
+table.ninebox .ninebox-row .ninebox-cell.ninebox-cell-four {
+  background-color: #8BC34A;
+}
+table.ninebox .ninebox-row .ninebox-cell.ninebox-cell-four:hover {
+  background-color: #7CB342;
+}
+table.ninebox .ninebox-row .ninebox-cell.ninebox-cell-five {
+  background-color: #4CAF50;
+}
+table.ninebox .ninebox-row .ninebox-cell.ninebox-cell-five:hover {
+  background-color: #43A047;
+}
+table.ninebox .ninebox-row .ninebox-cell.ninebox-cell-six {
+  background-color: #FFC107;
+}
+table.ninebox .ninebox-row .ninebox-cell.ninebox-cell-six:hover {
+  background-color: #FFB300;
+}
+table.ninebox .ninebox-row .ninebox-cell.ninebox-cell-seven {
+  background-color: #CDDC39;
+}
+table.ninebox .ninebox-row .ninebox-cell.ninebox-cell-seven:hover {
+  background-color: #C0CA33;
+}
+table.ninebox .ninebox-row .ninebox-cell.ninebox-cell-eight {
+  background-color: #8BC34A;
+}
+table.ninebox .ninebox-row .ninebox-cell.ninebox-cell-eight:hover {
+  background-color: #7CB342;
+}

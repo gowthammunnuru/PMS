@@ -1,0 +1,185 @@
+<head>
+    <title>Setup - {{review_metadata.desc}} - {{review_year}}/{{review_name}} - perform</title>
+</head>
+
+<div class="container-fluid">
+    <div class="bulkedit-contents" ng-class='{"contents_loading": querying }'>
+        <div class="panel">
+            <span class="glyphicon glyphicon-chevron-left back-to-setup" tooltip="Go back" ng-click="$state.go('admin.landing')"></span>
+            <input ng-model-options="{'debounce': 1000}"
+                   ng-change="setupReview(review_metadata)"
+                   autogrow placeholder="Description"
+                   class="desc input-xs"
+                   ng-model="review_metadata.desc">
+            <span class="heading">{{review_year}}/{{review_name}}</span>
+            <span class="status">{{save.status}}</span>
+
+            <span class="result-filter">
+                <span class="glyphicon glyphicon-search icon-search"></span>
+                <input placeholder="Filter .."
+                       ng-model-options="{'debounce':500}"
+                       ng-init="resultFilter.$=filteredText"
+                       ng-change=" reviewSetupHandler( resultFilter.$, 'ou', 1); $event.stopPropagation()"
+                       ng-model=resultFilter.$
+                       class="input-xs" type="text">
+            </span>
+
+            <span ng-if="users.length" class="pagination">
+
+                <span ng-class="{disabled:pagingDetails.currentPage === 1}">
+                    <a ng-click="setPage(allUsersByLocation, pagingDetails.currentPage - 1)">Previous</a>
+                </span>
+                <span ng-class="{disabled:pagingDetails.currentPage === pagingDetails.totalPages}">
+                    <a ng-click="setPage(allUsersByLocation, pagingDetails.currentPage + 1)">Next</a>
+                </span>
+
+            </span>
+        </div>
+
+        <table class="table bulkedit">
+            <thead>
+            <th class="dept" ng-class='{"th-active": sortBy=="ou"}' >
+                <span ng-click="reviewSetupHandler( resultFilter.$, 'ou', 1 )">Department</span>
+                <span ng-show="sortBy=='ou'" class="glyphicon {{sortOrderIcon[sortOrder]}}"></span>
+            </th>
+            <th class="name" ng-class='{"th-active": sortBy=="cn"}'>
+                <span ng-click="reviewSetupHandler( resultFilter.$, 'cn', 1 )"> Name</span>
+                <span ng-show="sortBy=='cn'" class="glyphicon {{sortOrderIcon[sortOrder]}}"></span>
+            </th>
+            <th class="user" ng-class='{"th-active": sortBy=="uid"}'>
+                <span ng-click="reviewSetupHandler( resultFilter.$, 'uid', 1 )">User</span>
+                <span ng-show="sortBy=='uid'" class="glyphicon {{sortOrderIcon[sortOrder]}}"></span>
+            </th>
+
+            <!--<th ng-class='{"th-active": sortBy=="desig"}'ng-click="sortColumn('desig')">Designation  <span ng-show="sortBy=='desig'"class="glyphicon {{sortOrderIcon[sortOrder]}}"></span></th> -->
+            <th class="template" ng-class='{"th-active": sortBy=="desig"}'>
+                <span ng-click="reviewSetupHandler( resultFilter.$, 'template_id', 1 )">Review Template</span>
+                <span ng-show="sortBy=='desig'" class="glyphicon {{sortOrderIcon[sortOrder]}}"></span>
+            </th>
+
+            <th class="reviewers" ng-class='{"th-active": sortBy=="permitted_users"}'>
+                <span>Reviewers</span>
+                <span ng-show="sortBy=='permitted_users'" class="glyphicon {{sortOrderIcon[sortOrder]}}"></span>
+            </th>
+            </thead>
+
+            <tbody>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+
+                <th class="global_template_id_prompt">
+                    <select ng-change="setGlobalTemplateID(global_template_id)"
+                            ng-model="global_template_id"
+                            ng-options="combined(template) as template.id group by template.year for template in templates | orderBy: ['-year', 'id']"
+                            class="form-control global_template_id">
+                        <option value="">(change all)</option>
+                    </select>
+                </th>
+
+                <th class="reviewers-td">
+                    <div class="reviewers-div" ng-click="setFocus($event)" >
+                        <div class="reviewers-list">
+                            <div class="reviewer-tag-list"
+                                 ng-repeat="reviewer in global_permitted_users"
+                                 contenteditable="true">
+
+                                <span contenteditable="false"
+                                      id="{{'rev-' + reviewer }}"
+                                      class="reviewer-tag">{{reviewer}}
+                                    <span class="remove-reviewer" ng-click="removeGlobalReviewer(reviewer)">x</span>
+                                </span>
+
+                            </div>
+
+                            <input class="permissions input-xs input-reviewer-add"
+                                   typeahead-on-select="setGlobalPermissions(globalReviewer)"
+                                   ng-paste="pasteFunction(user); $event.preventDefault()"
+                                   ng-model-options="{debounce: 500}"
+                                   type="text"
+                                   ng-model="globalReviewer"
+                                   typeahead="name for name in fullnames |filter: $viewValue "
+                                   typeahead-min-length="2">
+                        </div>
+                    </div>
+                </th>
+            </tr>
+
+            <tr  ng-class="{'read-only': user.committed}"
+                 ng-repeat="user in users">
+                <td>{{user.ou}}
+                    <span tooltip="Completed" tooltip-append-to-body=true ng-show="user.committed" class="status glyphicon glyphicon-lock"></span>
+                    <span tooltip="Delivered" tooltip-append-to-body=true ng-show="user.locked" class="status glyphicon glyphicon-ok"></span>
+                </td>
+                <td>{{user.cn}}</td>
+                <td>{{user.uid}}</td>
+                <!--<td>{{item.desig}}</td> -->
+                <td>
+                    <select ng-disabled="user.locked || user.committed"
+                            ng-attr-title="{{getTooltip(user)}}"
+                            ng-change='setTemplateID(user)'
+                            ng-model="user.template_id"
+                            ng-options="combined(template) as template.id group by template.year for template in templates | orderBy: ['-year', 'id']"
+                            class="form-control">
+                        <option value=""></option>
+                    </select>
+                </td>
+
+                <td class="reviewers-td">
+                    <div class="reviewers-div" ng-click="setFocus($event)" ng-attr-title="{{getTooltip(user)}}">
+                        <div class="reviewers-list" ng-class="{'read-only': user.committed || user.locked}">
+                            <div class="reviewer-tag-list"
+                                 ng-repeat="reviewer in user.permitted_users"
+                                 ng-copy="copyFunction(reviewer, user)"
+                                 ng-keydown="multipleSelectFunction($event, reviewer, user)"
+                                 contenteditable="true">
+
+                                <span ng-click="clickFunction($event, reviewer, user, $index)"
+                                      ng-hide="reviewer == user.uid"
+                                      contenteditable="false"
+                                      id="{{'rev-'+ user.uid + '-' + reviewer }}"
+                                      class="reviewer-tag">{{uidToCnMap[reviewer]}}
+                                    <span class="remove-reviewer" ng-click="removeReviewer(user,reviewer)">x</span>
+                                </span>
+
+                            </div>
+
+                            <input class="permissions input-xs input-reviewer-add"
+                                   ng-class="{'read-only': user.committed || user.locked}"
+                                   ng-readonly="user.locked || user.committed"
+                                   ng-keyup="multipleSelectFunction($event,reviewer,user)"
+                                   typeahead-on-select="setPermissions(user)"
+                                   ng-paste="pasteFunction(user); $event.preventDefault()"
+                                   ng-model-options="{debounce: 500}"
+                                   type="text"
+                                   ng-model="user.reviewer"
+                                   typeahead="name for name in fullnames |filter: $viewValue | filter:'!'+user.cn | AddedReviewersFilter :user.permitted_users:fullnameToUidMap"
+                                   typeahead-min-length="2">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <div ng-hide="users.length">
+                    <center>No match found for <strong>{{resultFilter.$}}</strong>.&nbsp;&nbsp;
+                        <span class="clear-filter" ng-click="resultFilter.$ = ''">Clear</span>
+                    </center>
+                    <br/>
+                </div>
+            </tr>
+            </tbody>
+        </table>
+        <ul ng-if="users.length" class="pagination">
+
+                <li ng-class="{disabled:pagingDetails.currentPage === 1}">
+                    <a ng-click="setPage(allUsersByLocation, pagingDetails.currentPage - 1)">Previous</a>
+                </li>
+                <li ng-class="{disabled:pagingDetails.currentPage === pagingDetails.totalPages}">
+                    <a ng-click="setPage(allUsersByLocation, pagingDetails.currentPage + 1)">Next</a>
+                </li>
+
+            </ul>
+    </div>
+</div>

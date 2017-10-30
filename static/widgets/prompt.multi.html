@@ -1,0 +1,19 @@
+<!-- Heading -->
+<div ng-style="{'margin-top': mode == 'headings_only' ? '0px' : '25px', 'margin-bottom': mode == 'headings_only'? '40px': '69px'}" class="multi-prompt-section">
+  <h4 ng-show="mode == 'headings_only'">{{blocktitle}}</h4>
+  <div ng-show="mode == 'headings_only'" class="multi-prompt-wrapper multi-prompt-wrapper-fixed" ng-repeat="criterion in criteria">
+
+    <span class="multi-prompt-fixed-criteria-name">{{criterion.name}}  <span popover-title="{{criterion.name}}" popover="{{criterion.desc}}" popover-trigger="mouseenter" popover-animation=true popover-append-to-body=true class="popover-target">?</span></span>
+
+  </div>
+
+  <!-- Prompt -->
+
+  <div ng-show="mode == 'prompt'" class="multi-prompt-wrapper" ng-repeat="criterion in criteria">
+    <div>
+      <span class="multi-prompt-label" ng-repeat="heading in headings" ng-show="criterion.colorIndex == $index">{{heading.name}}</span>
+    </div>
+
+    <span ng-repeat="heading in headings" ng-mouseover="review_locked || mouseover($event, $index, criterion, heading)" ng-mouseout="review_locked || mouseout($event, $index, criterion, heading)" ng-click="review_locked || setRating(criterion, $index, heading)" ng-style="criterion.colors[$index]" class="multi-prompt-block multi-prompt-block-{{heading.pts}}"></span>
+  </div>
+</div>

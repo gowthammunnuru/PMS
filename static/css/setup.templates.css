@@ -1,0 +1,65 @@
+.setup-templates {
+  margin-top: 70px;
+}
+.setup-templates .panel {
+  padding: 10px;
+  box-shadow: 0 0 0 1px #d1d1d1,0 0 4px 1px #ccc;
+  background-color: white;
+  height: 50px;
+}
+.setup-templates .panel .heading {
+  margin: 0px;
+  font-size: 25px;
+  position: relative;
+  top: -4px;
+}
+.setup-templates .panel .year-rname {
+  font-size: 20px;
+  margin-left: 15px;
+  position: relative;
+  top: -4px;
+}
+.setup-templates .item {
+  padding: 15px 20px;
+  background-color: white;
+  margin: 5px 0px;
+  box-shadow: 0 0 0 1px #d1d1d1,0 0 4px 1px #ccc;
+  cursor: pointer;
+}
+.setup-templates .item:hover {
+  background-color: whitesmoke;
+}
+.setup-templates .item:hover .preview {
+  display: block;
+}
+.setup-templates .item .preview {
+  display: none;
+  float: right;
+  margin-right: 20px;
+  color: #969696;
+}
+.setup-templates .item .preview .glyphicon {
+  margin-left: 5px;
+  top: 5px;
+}
+.setup-templates .item .is-lead {
+  opacity: 0;
+  margin-right: 5px;
+  color: #009688;
+  cursor: default;
+}
+.setup-templates .item .is-lead.active {
+  opacity: 1;
+}
+.setup-templates .item .id {
+  font-size: 20px;
+  width: 200px;
+  display: inline-block;
+}
+.setup-templates .item .criteria-count {
+  cursor: default;
+}
+.setup-templates .item .criteria-count .glyphicon {
+  margin-right: 10px;
+  font-size: 12px;
+}

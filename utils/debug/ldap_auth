@@ -1,0 +1,47 @@
+import sys, os
+import ldap
+import getpass
+
+def ldapAuth(uname, pwd):
+
+    LDAP_SEARCH_BASE = 'dc=anim,dc=dreamworks,dc=com'
+    LDAP_URL         = 'ldap://ldap.anim.dreamworks.com'
+    LDAP_VERSION_3   = True
+
+    if not uname or not pwd:
+        print "Username or password not supplied"
+        return False
+
+    ld = ldap.initialize(LDAP_URL)
+    if LDAP_VERSION_3:
+        ld.set_option(ldap.VERSION3, 1)
+
+    udn = ld.search_s(LDAP_SEARCH_BASE, ldap.SCOPE_SUBTREE,
+                           '(uid=%s)' % uname, ['dn', 'mail', 'employeeType'])
+
+    if not udn:
+        print "Cannot resolve username: %s" % uname
+        return False
+
+    # Only dwa and privileged users can acesses & log into
+    # critiq instance hosted in dwa.
+    if os.environ['STUDIO'] in ['GLD', 'RWC']:
+        if (udn[0][1]['employeeType'][0]).lower() not in ['emp', 'vendor']:
+            print "%s does not have permissions to login" % name
+            return False
+
+    try:
+        bindres = ld.simple_bind_s(udn[0][0], pwd)
+    except ldap.INVALID_CREDENTIALS, ldap.UNWILLING_TO_PERFORM:
+        print "Invalid or incomplete credentials for %s" % uname
+        return False
+    except Exception as out:
+        print "Auth attempt for %s had an unexpected error: %s" % (uname, out)
+        return False
+    else:
+        print "Correct password for %s specified" % uname
+        return True
+
+uname = getpass.getuser()
+pword = getpass.getpass()
+print ldapAuth(uname, pword)
