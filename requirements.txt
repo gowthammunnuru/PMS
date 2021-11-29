@@ -9,4 +9,4 @@ supervisor==3.0a12
 tornado==2.2.1
 urllib3==1.9
 wsgiref==0.1.2
-python-ldap==2.4.15
+python-ldap==3.4.0
