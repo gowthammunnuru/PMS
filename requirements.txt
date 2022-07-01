@@ -5,7 +5,7 @@ path==2.1
 pymongo==2.7.2
 pytz==2015.4
 requests==2.6.0
-supervisor==3.0a12
+supervisor==3.0.1
 tornado==2.2.1
 urllib3==1.9
 wsgiref==0.1.2
